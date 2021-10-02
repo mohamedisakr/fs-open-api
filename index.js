@@ -30,5 +30,24 @@ app.get('/api/notes', (request, response) => {
   response.json(notes)
 })
 
+const findById = (id) => {
+  const note = notes.find((n) => n.id === id)
+  return note
+}
+
+app.get('/api/notes/:id', (request, response) => {
+  const id = Number(request.params.id)
+  console.log(`id parameter : ${id}`)
+
+  const note = findById(id)
+  if (note) {
+    response.json(note)
+  } else {
+    response
+      .status(404)
+      .json({message: 'The server has not found anything matching'})
+  }
+})
+
 const PORT = 3001
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`))
