@@ -46,23 +46,22 @@ const generateId = () => {
 }
 
 app.post('/api/persons', (request, response) => {
-  const {content, important} = request.body
+  const {name, number} = request.body
 
-  if (!content) {
+  if (!name) {
     return response.status(400).json({
-      error: 'content missing',
+      error: 'name missing',
     })
   }
 
-  const note = {
-    content: content,
-    important: important ?? false,
-    date: new Date(),
+  const person = {
+    name,
+    number,
     id: generateId(),
   }
 
-  persons = persons.concat(note)
-  response.json(note)
+  persons = persons.concat(person)
+  response.json(person)
 })
 
 const findById = (id) => {
