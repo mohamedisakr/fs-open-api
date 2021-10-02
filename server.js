@@ -54,10 +54,28 @@ app.post('/api/persons', (request, response) => {
     })
   }
 
+  if (!number) {
+    return response.status(400).json({
+      error: 'number missing',
+    })
+  }
+
+  const foundPerson = persons.find(
+    (person) => person.name.toLowerCase() === name.toLowerCase(),
+  )
+
+  console.log(foundPerson)
+
+  if (foundPerson) {
+    return response.status(400).json({
+      error: 'name must be unique',
+    })
+  }
+
   const person = {
+    id: generateId(),
     name,
     number,
-    id: generateId(),
   }
 
   persons = persons.concat(person)
