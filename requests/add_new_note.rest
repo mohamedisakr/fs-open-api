@@ -1,0 +1,8 @@
+POST http://localhost:3001/api/notes/
+Content-Type: application/json
+
+{
+  "id": 100,
+  "content" : "Web API using Node.js",  
+}
+
