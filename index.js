@@ -1,41 +1,17 @@
-import express from 'express'
+const express = require('express')
+const Note = require('./models/note.js')
+
 const app = express()
 
 app.use(express.json())
 
-let notes = [
-  {
-    id: 1,
-    content: 'HTML is easy',
-    date: '2019-05-30T17:30:31.098Z',
-    important: true,
-  },
-  {
-    id: 2,
-    content: 'Browser can execute only Javascript',
-    date: '2019-05-30T18:39:34.091Z',
-    important: false,
-  },
-  {
-    id: 3,
-    content: 'GET and POST are the most important methods of HTTP protocol',
-    date: '2019-05-30T19:20:14.298Z',
-    important: true,
-  },
-]
-
 app.get('/', (request, response) => {
-  response.send('<h1>Hello World!</h1>')
+  response.send('<h1>API</h1>')
 })
 
-app.get('/api/notes', (request, response) => {
-  response.json(notes)
+app.get('/api/notes', async (request, response) => {
+  await Note.find({}).then((notes) => response.json(notes))
 })
-
-const generateId = () => {
-  const maxId = notes.length > 0 ? Math.max(...notes.map((n) => n.id)) : 0
-  return maxId + 1
-}
 
 app.post('/api/notes', (request, response) => {
   const {content, important} = request.body
@@ -46,27 +22,20 @@ app.post('/api/notes', (request, response) => {
     })
   }
 
-  const note = {
+  const note = Note.create({
     content: content,
     important: important ?? false,
     date: new Date(),
-    id: generateId(),
-  }
+  })
 
-  notes = notes.concat(note)
   response.json(note)
 })
 
-const findById = (id) => {
-  const note = notes.find((n) => n.id === id)
-  return note
-}
-
-app.get('/api/notes/:id', (request, response) => {
-  const id = Number(request.params.id)
+app.get('/api/notes/:id', async (request, response) => {
+  const id = request.params.id
   console.log(`id parameter : ${id}`)
+  const note = await Note.findById(id).lean().exec()
 
-  const note = findById(id)
   if (note) {
     response.json(note)
   } else {
@@ -76,6 +45,7 @@ app.get('/api/notes/:id', (request, response) => {
   }
 })
 
+// TODO
 app.delete('/api/notes/:id', (request, response) => {
   const id = Number(request.params.id)
   notes = notes.filter((note) => note.id !== id)
