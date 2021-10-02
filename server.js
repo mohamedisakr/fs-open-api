@@ -66,17 +66,17 @@ app.post('/api/persons', (request, response) => {
 })
 
 const findById = (id) => {
-  const note = persons.find((n) => n.id === id)
-  return note
+  const person = persons.find((n) => n.id === id)
+  return person
 }
 
 app.get('/api/persons/:id', (request, response) => {
   const id = Number(request.params.id)
   console.log(`id parameter : ${id}`)
 
-  const note = findById(id)
-  if (note) {
-    response.json(note)
+  const person = findById(id)
+  if (person) {
+    response.json(person)
   } else {
     response
       .status(404)
