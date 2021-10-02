@@ -3,7 +3,7 @@ import morgan from 'morgan'
 
 const app = express()
 
-app.use(morgan('tiny'))
+app.use(morgan('combined'))
 
 app.use(express.json())
 
