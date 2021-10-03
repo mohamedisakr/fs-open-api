@@ -1,8 +1,10 @@
 const express = require('express')
+const cors = require('cors')
 const morgan = require('morgan')
 const Person = require('./models/person')
 
 const app = express()
+app.use(cors())
 app.use(morgan('combined'))
 app.use(express.json())
 
@@ -92,7 +94,7 @@ app.put('/api/persons/:id', async (request, response, next) => {
 
 app.delete('/api/persons/:id', async (request, response) => {
   const {id} = request.params
-  const person = await Person.findByIdAndDelete(id).lean().exec()
+  const person = await Person.findByIdAndDelete(id.toString()).lean().exec()
   response.status(204).end()
 })
 
