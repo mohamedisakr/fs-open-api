@@ -28,10 +28,12 @@ app.get('/api/persons', async (request, response) => {
   await Person.find({}).then((persons) => response.json(persons))
 })
 
-app.post('/api/persons', async (request, response) => {
+app.post('/api/persons', async (request, response, next) => {
   const {name, number} = request.body
 
-  if (!name) {
+  try {
+    //#region
+    /*     if (!name) {
     return response.status(400).json({
       error: 'name missing',
     })
@@ -42,8 +44,8 @@ app.post('/api/persons', async (request, response) => {
       error: 'number missing',
     })
   }
-
-  /*
+*/
+    /*
   // TODO: check for duplicate name
   const foundPerson = await Person.find({name}).lean().exec()
 
@@ -55,9 +57,13 @@ app.post('/api/persons', async (request, response) => {
     })
   }
 */
+    //#endregion
 
-  const person = await Person.create({name, number})
-  response.json(person)
+    const person = await Person.create({name, number})
+    response.json(person.toJSON())
+  } catch (error) {
+    next(error)
+  }
 })
 
 app.get('/api/persons/:id', async (request, response, next) => {
@@ -109,6 +115,8 @@ const errorHandler = (error, request, response, next) => {
 
   if (error.name === 'CastError') {
     return response.status(400).send({error: 'malformatted id'})
+  } else if (error.name === 'ValidationError') {
+    return response.status(400).json({error: error.message})
   }
 
   next(error)
