@@ -1,55 +1,32 @@
 const express = require('express')
 const morgan = require('morgan')
+const Person = require('./models/person')
 
 const app = express()
-
 app.use(morgan('combined'))
-
 app.use(express.json())
 
-let persons = [
-  {
-    id: 1,
-    name: 'Arto Hellas',
-    number: '040-123456',
-  },
-  {
-    id: 2,
-    name: 'Ada Lovelace',
-    number: '39-44-5323523',
-  },
-  {
-    id: 3,
-    name: 'Dan Abramov',
-    number: '12-43-234345',
-  },
-  {
-    id: 4,
-    name: 'Mary Poppendieck',
-    number: '39-23-6423122',
-  },
-]
-
 app.get('/', (request, response) => {
-  response.send('<h1>Hello World!</h1>')
+  response.send('<h1>API Home Page</h1>')
 })
 
 app.get('/api/info', (request, response) => {
-  response
-    .status(200)
-    .json({message: `Phonebook has info for ${persons.length} people`})
+  Person.estimatedDocumentCount((err, count) => {
+    if (err) {
+      response.status(404).end()
+    } else {
+      response
+        .status(200)
+        .json({message: `Phonebook has info for ${count} people`})
+    }
+  })
 })
 
-app.get('/api/persons', (request, response) => {
-  response.json(persons)
+app.get('/api/persons', async (request, response) => {
+  await Person.find({}).then((persons) => response.json(persons))
 })
 
-const generateId = () => {
-  const maxId = persons.length > 0 ? Math.max(...persons.map((n) => n.id)) : 0
-  return maxId + 1
-}
-
-app.post('/api/persons', (request, response) => {
+app.post('/api/persons', async (request, response) => {
   const {name, number} = request.body
 
   if (!name) {
@@ -64,9 +41,9 @@ app.post('/api/persons', (request, response) => {
     })
   }
 
-  const foundPerson = persons.find(
-    (person) => person.name.toLowerCase() === name.toLowerCase(),
-  )
+  /*
+  // TODO: check for duplicate name
+  const foundPerson = await Person.find({name}).lean().exec()
 
   console.log(foundPerson)
 
@@ -75,27 +52,21 @@ app.post('/api/persons', (request, response) => {
       error: 'name must be unique',
     })
   }
+*/
 
-  const person = {
-    id: generateId(),
+  const person = await Person.create({
     name,
     number,
-  }
+  })
 
-  persons = persons.concat(person)
   response.json(person)
 })
 
-const findById = (id) => {
-  const person = persons.find((n) => n.id === id)
-  return person
-}
-
-app.get('/api/persons/:id', (request, response) => {
-  const id = Number(request.params.id)
+app.get('/api/persons/:id', async (request, response) => {
+  const {id} = request.params
   console.log(`id parameter : ${id}`)
 
-  const person = findById(id)
+  const person = await Person.findById(id).lean().exec()
   if (person) {
     response.json(person)
   } else {
@@ -105,10 +76,23 @@ app.get('/api/persons/:id', (request, response) => {
   }
 })
 
-app.delete('/api/persons/:id', (request, response) => {
-  const id = Number(request.params.id)
-  persons = persons.filter((note) => note.id !== id)
+app.put('/api/persons/:id', async (request, response, next) => {
+  const {id} = request.params
+  const {name, number} = request.body
 
+  const person = {name, number}
+  console.log(person)
+
+  await Person.findByIdAndUpdate(id, person, {new: true})
+    .then((updatedPerson) => {
+      response.json(updatedPerson)
+    })
+    .catch((error) => next(error))
+})
+
+app.delete('/api/persons/:id', async (request, response) => {
+  const {id} = request.params
+  const person = await Person.findByIdAndDelete(id).lean().exec()
   response.status(204).end()
 })
 

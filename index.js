@@ -6,7 +6,7 @@ const app = express()
 app.use(express.json())
 
 app.get('/', (request, response) => {
-  response.send('<h1>API</h1>')
+  response.send('<h1>API Home Page</h1>')
 })
 
 app.get('/api/notes', async (request, response) => {
@@ -45,11 +45,24 @@ app.get('/api/notes/:id', async (request, response) => {
   }
 })
 
-// TODO
-app.delete('/api/notes/:id', (request, response) => {
-  const id = Number(request.params.id)
-  notes = notes.filter((note) => note.id !== id)
+app.put('/api/notes/:id', (request, response, next) => {
+  const {content, important} = request.body
 
+  const note = {
+    content,
+    important,
+  }
+
+  Note.findByIdAndUpdate(request.params.id, note, {new: true})
+    .then((updatedNote) => {
+      response.json(updatedNote)
+    })
+    .catch((error) => next(error))
+})
+
+app.delete('/api/notes/:id', async (request, response) => {
+  const {id} = request.params
+  const note = await Note.findByIdAndDelete(id).exec()
   response.status(204).end()
 })
 
