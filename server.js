@@ -56,25 +56,25 @@ app.post('/api/persons', async (request, response) => {
   }
 */
 
-  const person = await Person.create({
-    name,
-    number,
-  })
-
+  const person = await Person.create({name, number})
   response.json(person)
 })
 
-app.get('/api/persons/:id', async (request, response) => {
+app.get('/api/persons/:id', async (request, response, next) => {
   const {id} = request.params
-  console.log(`id parameter : ${id}`)
 
-  const person = await Person.findById(id).lean().exec()
-  if (person) {
-    response.json(person)
-  } else {
-    response
-      .status(404)
-      .json({message: 'The server has not found anything matching'})
+  try {
+    const person = await Person.findById(id).lean().exec()
+    if (person) {
+      response.json(person)
+    } else {
+      response
+        .status(404)
+        .json({message: 'The server has not found anything matching'})
+    }
+  } catch (error) {
+    console.log(error)
+    next(error)
   }
 })
 
@@ -83,20 +83,46 @@ app.put('/api/persons/:id', async (request, response, next) => {
   const {name, number} = request.body
 
   const person = {name, number}
-  console.log(person)
 
-  await Person.findByIdAndUpdate(id, person, {new: true})
-    .then((updatedPerson) => {
-      response.json(updatedPerson)
+  try {
+    const updatedPerson = await Person.findByIdAndUpdate(id, person, {
+      new: true,
     })
-    .catch((error) => next(error))
+    response.json(updatedPerson)
+  } catch (error) {
+    next(error)
+  }
 })
 
-app.delete('/api/persons/:id', async (request, response) => {
-  const {id} = request.params
-  const person = await Person.findByIdAndDelete(id.toString()).lean().exec()
-  response.status(204).end()
+app.delete('/api/persons/:id', async (request, response, next) => {
+  try {
+    const {id} = request.params
+    const person = await Person.findByIdAndDelete(id.toString()).lean().exec()
+    response.status(204).end()
+  } catch (error) {
+    next(error)
+  }
 })
+
+const errorHandler = (error, request, response, next) => {
+  console.error(error.message)
+
+  if (error.name === 'CastError') {
+    return response.status(400).send({error: 'malformatted id'})
+  }
+
+  next(error)
+}
+
+const unknownEndpoint = (request, response) => {
+  response.status(404).send({error: 'unknown endpoint'})
+}
+
+// handler of requests with unknown endpoint
+app.use(unknownEndpoint)
+
+// this has to be the last loaded middleware.
+app.use(errorHandler)
 
 const PORT = 3001
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`))
