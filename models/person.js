@@ -6,7 +6,7 @@ const {Schema, model} = mongoose
 
 const personSchema = new Schema({
   name: {type: String, unique: true, minlength: 3, required: true},
-  number: {type: String, minlength: 3, required: true},
+  number: {type: String, minlength: 8, required: true},
 })
 
 personSchema.set('toJSON', {
