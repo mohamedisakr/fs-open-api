@@ -2,6 +2,7 @@ const {
   dummy,
   countTotalLikes,
   getFavoriteBlog,
+  getMostLikes,
 } = require('../utils/list-helper')
 const {listWithOneBlog, blogs} = require('../fixtures/blogs.data')
 
@@ -55,6 +56,14 @@ describe('getFavoriteBlog', () => {
       likes: 12,
     }
     const actual = getFavoriteBlog(blogs)
+    expect(actual).toEqual(expected)
+  })
+})
+
+describe('mostLikes', () => {
+  test('when large list, get the most like', () => {
+    const expected = {author: 'Edsger W. Dijkstra', likes: 17}
+    const actual = getMostLikes(blogs)
     expect(actual).toEqual(expected)
   })
 })

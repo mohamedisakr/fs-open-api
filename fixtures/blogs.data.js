@@ -61,3 +61,42 @@ const blogs = [
 ]
 
 module.exports = {listWithOneBlog, blogs}
+
+/*
+const sums = [
+  blogs
+    .reduce((map, item) => {
+      const {author: key, likes} = item
+      const prev = map.get(key)
+
+      if (prev) {
+        prev.likes += likes
+      } else {
+        map.set(key, Object.assign({}, item))
+      }
+
+      return map
+    }, new Map())
+    .values(),
+]
+
+console.log(sums)
+*/
+
+/*
+const getMax = (blogs) => {
+  let maxLikes = 0
+  let theBlog = {}
+  blogs.forEach(({author, likes}) => {
+    if (likes > maxLikes) {
+      maxLikes = likes
+      theBlog = {author, likes: maxLikes}
+    }
+  })
+  return theBlog
+}
+
+const groups = groupBy(blogs)
+const mostBlog = getMax(groups)
+console.log(mostBlog)
+// */
