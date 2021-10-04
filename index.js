@@ -1,3 +1,15 @@
+const app = require('./app') // the actual Express application
+const http = require('http')
+const config = require('./utils/config')
+const {info} = require('./utils/logger')
+
+const server = http.createServer(app)
+
+server.listen(config.PORT, () => {
+  info(`Server running on port ${config.PORT}`)
+})
+
+/*
 const express = require('express')
 const Note = require('./models/note.js')
 
@@ -68,3 +80,4 @@ app.delete('/api/notes/:id', async (request, response) => {
 
 const PORT = 3001
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`))
+*/
