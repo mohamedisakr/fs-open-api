@@ -12,7 +12,25 @@ const countTotalLikes = (blogs) => {
   return total
 }
 
+/**
+ * finds out which blog has most likes.
+ * If there are many top favorites, it is enough to return one of them.
+ * @param {*} blogs a list of blogs
+ * @returns
+ */
+const getFavoriteBlog = (blogs) => {
+  let favoriteBlog = {}
+  let mostLikes = 0
+  blogs.forEach(({title, author, likes}) => {
+    if (likes > mostLikes) {
+      mostLikes = likes
+      favoriteBlog = {title, author, likes: mostLikes}
+    }
+  })
+  return favoriteBlog
+}
+
 // helpers
 const reducer = (sum, blog) => sum + blog.likes
 
-module.exports = {dummy, countTotalLikes}
+module.exports = {dummy, countTotalLikes, getFavoriteBlog}

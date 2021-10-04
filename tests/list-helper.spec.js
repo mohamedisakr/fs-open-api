@@ -1,4 +1,8 @@
-const {dummy, countTotalLikes} = require('../utils/list-helper')
+const {
+  dummy,
+  countTotalLikes,
+  getFavoriteBlog,
+} = require('../utils/list-helper')
 const {listWithOneBlog, blogs} = require('../fixtures/blogs.data')
 
 describe('dummy', () => {
@@ -24,5 +28,33 @@ describe('total likes', () => {
   test('when large list, get the right totals', () => {
     const result = countTotalLikes(blogs)
     expect(result).toBe(36)
+  })
+})
+
+describe('getFavoriteBlog', () => {
+  test('when list is empty, equals empty object {}', () => {
+    const emptyBlogs = []
+    const result = getFavoriteBlog(emptyBlogs)
+    expect(result).toEqual({})
+  })
+
+  test('when list has only one blog, equals to this blog', () => {
+    const expected = {
+      title: 'Go To Statement Considered Harmful',
+      author: 'Edsger W. Dijkstra',
+      likes: 5,
+    }
+    const actual = getFavoriteBlog(listWithOneBlog)
+    expect(actual).toEqual(expected)
+  })
+
+  test('when large list, get the right favorite', () => {
+    const expected = {
+      title: 'Canonical string reduction',
+      author: 'Edsger W. Dijkstra',
+      likes: 12,
+    }
+    const actual = getFavoriteBlog(blogs)
+    expect(actual).toEqual(expected)
   })
 })
