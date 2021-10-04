@@ -34,21 +34,11 @@ const getFavoriteBlog = (blogs) => {
  * returns the author who has the largest amount of blogs.
  * The return value also contains the number of blogs the top author has
  *
- * @param {*} blogs an array of blogs
+ * @param {*} list an array of blogs
  */
-const getMostBlogs = (blogs) => {
-  const groups = groupBy(blogs)
-  let mostBlog = {}
-  let maxLikes = 0
-
-  groups.forEach(({author, likes}) => {
-    if (likes > maxLikes) {
-      maxLikes = likes
-      mostBlog = {author, likes: maxLikes}
-    }
-  })
-
-  return mostBlog
+const getMostBlogs = (list) => {
+  const authors = list.map(({author}) => author)
+  return getAuthorWithMaxBlogs(authors)
 }
 
 /**
@@ -81,8 +71,8 @@ const reducer = (sum, blog) => sum + blog.likes
 
 const groupBy = (blogs) => {
   var result = []
+
   const reducer = (res, blog) => {
-    // console.log(`res : ${res}`)
     if (!res[blog.author]) {
       res[blog.author] = {author: blog.author, likes: 0}
       result.push(res[blog.author])
@@ -93,6 +83,36 @@ const groupBy = (blogs) => {
 
   blogs.reduce(reducer, {})
   return result
+}
+
+const groupByAuthorAndBlog = (blogs) => {
+  var result = []
+
+  const reducer = (res, blog) => {
+    if (!res[blog.author]) {
+      res[blog.author] = {author: blog.author, blogs: 0}
+      result.push(res[blog.author])
+    }
+    res[blog.author].blogs += 1
+    return res
+  }
+
+  blogs.reduce(reducer, {})
+  return result
+}
+
+const getAuthorWithMaxBlogs = (authors) => {
+  let maxCount = 0
+  let author = null
+  const occurrences = new Map()
+  authors.forEach((item) => {
+    const count = occurrences.has(item) ? occurrences.get(item) + 1 : 1
+    occurrences.set(item, count)
+    maxCount = count > maxCount ? count : maxCount
+    author = item
+  })
+
+  return {author, blogs: maxCount}
 }
 
 module.exports = {
