@@ -9,7 +9,7 @@ const listWithOneBlog = [
   },
 ]
 
-const initialNotes = [
+const initialBlogs = [
   {
     title: 'React patterns',
     author: 'Michael Chan',
@@ -75,4 +75,4 @@ const blogs = [
   },
 ]
 
-module.exports = {listWithOneBlog, blogs, initialNotes}
+module.exports = {listWithOneBlog, blogs, initialBlogs}
