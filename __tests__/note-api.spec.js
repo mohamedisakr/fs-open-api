@@ -13,7 +13,6 @@ test('notes are returned as json', async () => {
 
 test('there are two notes', async () => {
   const response = await api.get('/api/notes')
-  console.log(response.body)
   expect(response.body).toHaveLength(2)
 })
 
