@@ -9,6 +9,21 @@ const listWithOneBlog = [
   },
 ]
 
+const initialNotes = [
+  {
+    title: 'React patterns',
+    author: 'Michael Chan',
+    url: 'https://reactpatterns.com/',
+    likes: 7,
+  },
+  {
+    title: 'First class tests',
+    author: 'Robert C. Martin',
+    url: 'http://blog.cleancoder.com/uncle-bob/2017/05/05/TestDefinitions.htmll',
+    likes: 10,
+  },
+]
+
 const blogs = [
   {
     _id: '5a422a851b54a676234d17f7',
@@ -60,4 +75,4 @@ const blogs = [
   },
 ]
 
-module.exports = {listWithOneBlog, blogs}
+module.exports = {listWithOneBlog, blogs, initialNotes}
