@@ -6,52 +6,25 @@ notesRouter.get('/', async (request, response) => {
   response.json(notes)
 })
 
-notesRouter.post('/', async (request, response, next) => {
+notesRouter.post('/', async (request, response) => {
   const body = request.body
-  try {
-    const note = new Note({
-      content: body.content,
-      important: body.important || false,
-      date: new Date(),
-    })
 
-    const savedNote = await note.save()
-    response.json(savedNote)
-  } catch (error) {
-    next(error)
-  }
-
-  /*
-  // my implementation
-  const {content, important} = request.body
-
-  const note = await Note.create({
-    content: content,
-    important: important || false,
+  const note = new Note({
+    content: body.content,
+    important: body.important || false,
     date: new Date(),
   })
 
-  response.json(note)
-*/
-
-  // note
-  //   .save()
-  //   .then((savedNote) => {
-  //     response.json(savedNote)
-  //   })
-  //   .catch((error) => next(error))
+  const savedNote = await note.save()
+  response.json(savedNote)
 })
 
-notesRouter.get('/:id', async (request, response, next) => {
-  try {
-    const note = await Note.findById(request.params.id)
-    if (note) {
-      response.json(note)
-    } else {
-      response.status(404).end()
-    }
-  } catch (exception) {
-    next(exception)
+notesRouter.get('/:id', async (request, response) => {
+  const note = await Note.findById(request.params.id)
+  if (note) {
+    response.json(note)
+  } else {
+    response.status(404).end()
   }
 })
 
