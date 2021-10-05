@@ -13,10 +13,6 @@ beforeEach(async () => {
   await Blog.create(initialNotes)
 })
 
-// writing a test that makes an HTTP GET request to the /api/blogs url.
-// Verify that the blog list application returns the correct amount of
-// blog posts in the JSON format.
-
 test('blogs are returned as json', async () => {
   await api
     .get(url)
@@ -27,6 +23,31 @@ test('blogs are returned as json', async () => {
 test('all blogs are returned', async () => {
   const response = await api.get(url)
   expect(response.body).toHaveLength(initialNotes.length)
+})
+
+// verifies that the unique identifier property of the blog posts is
+// named id, by default the database names the property _id.
+// Verifying the existence of a property is easily done with Jest's
+// toBeDefined matcher.
+test('verifies that the unique identifier property of the blog posts is named id', async () => {
+  const newBlog = {
+    title: 'full stack is very interesting',
+    author: 'Mohamed Sakr',
+    url: 'example.com',
+    likes: 0,
+  }
+
+  await api
+    .post(url)
+    .send(newBlog)
+    .expect(201)
+    .expect('Content-Type', /application\/json/)
+
+  const allBlogs = await blogsInDb()
+  const theBlog = allBlogs.find(
+    (blog) => blog.title.toLowerCase() === newBlog.title.toLowerCase(),
+  )
+  expect(theBlog.id).toBeDefined()
 })
 
 afterAll(() => {
