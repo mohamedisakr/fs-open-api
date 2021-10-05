@@ -1,3 +1,16 @@
+const initialNotes = [
+  {
+    content: 'HTML is easy',
+    date: new Date(),
+    important: false,
+  },
+  {
+    content: 'Browser can execute only Javascript',
+    date: new Date(),
+    important: true,
+  },
+]
+
 const notes = [
   {
     id: 1,
@@ -19,4 +32,4 @@ const notes = [
   },
 ]
 
-module.exports = notes
+module.exports = {notes, initialNotes}
