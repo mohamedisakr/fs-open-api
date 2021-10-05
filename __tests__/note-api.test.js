@@ -9,7 +9,7 @@ const api = supertest(app)
 
 beforeEach(async () => {
   await Note.deleteMany({})
-  await Note.create(initialNotes[0], initialNotes[1])
+  await Note.create(initialNotes)
 })
 
 test('notes are returned as json', async () => {
