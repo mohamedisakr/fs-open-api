@@ -91,6 +91,15 @@ test('verifies that if the likes property is missing, default to 0', async () =>
   expect(theBlog.likes).toBe(0)
 })
 
+test('verifies if title & url are missing, responds to the request with status code 400 Bad Request', async () => {
+  const newBlog = {author: 'Mohamed Sakr'}
+
+  await api
+    .post(url)
+    .send(newBlog)
+    .expect(400)
+    .expect('Content-Type', /application\/json/)
+})
 afterAll(() => {
   mongoose.connection.close()
 })
