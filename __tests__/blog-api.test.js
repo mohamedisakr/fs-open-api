@@ -71,6 +71,26 @@ test('verifies that making an HTTP POST successfully creates a new blog post.', 
   // expect(titles).toContain(newBlog.title)
 })
 
+test('verifies that if the likes property is missing, default to 0', async () => {
+  const newBlog = {
+    title: 'Intro to Web API',
+    author: 'Mohamed Sakr',
+    url: 'example.com/intro-to-web-api',
+  }
+
+  await api
+    .post(url)
+    .send(newBlog)
+    .expect(201)
+    .expect('Content-Type', /application\/json/)
+
+  const allBlogs = await blogsInDb()
+  const theBlog = allBlogs.find(
+    (blog) => blog.title.toLowerCase() === newBlog.title.toLowerCase(),
+  )
+  expect(theBlog.likes).toBe(0)
+})
+
 afterAll(() => {
   mongoose.connection.close()
 })
