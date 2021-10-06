@@ -66,9 +66,6 @@ test('verifies that making an HTTP POST successfully creates a new blog post.', 
 
   const blogsAtEnd = await blogsInDb()
   expect(blogsAtEnd).toHaveLength(initialBlogs.length + 1)
-
-  // const titles = blogsAtEnd.map((n) => n.title)
-  // expect(titles).toContain(newBlog.title)
 })
 
 test('verifies that if the likes property is missing, default to 0', async () => {
@@ -113,6 +110,16 @@ test('delete blog succeeds with status code 204 if id is valid', async () => {
   expect(blogsAtEnd.length).toBe(initialBlogs.length - 1)
   expect(blogsAtEnd.length).toBe(blogsAtStart.length - 1)
   expect(titles).not.toContain(blogToDelete.title)
+})
+
+test('update blog success with status code 200', async () => {
+  const blogsAtStart = await blogsInDb()
+  console.log(`all blogs : ${blogsAtStart}`)
+  const firstBlog = blogsAtStart[0]
+  console.log(`first blog : ${firstBlog}`)
+  const blogToUpdate = {...firstBlog, likes: 5}
+  await api.put(`${url}/${firstBlog.id}`).send(blogToUpdate).expect(200)
+  expect(blogToUpdate.likes).toBeGreaterThanOrEqual(5)
 })
 
 afterAll(() => {
