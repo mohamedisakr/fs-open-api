@@ -1,6 +1,7 @@
 const mongoose = require('mongoose')
+const {Schema, model} = mongoose
 
-const noteSchema = new mongoose.Schema({
+const noteSchema = new Schema({
   content: {
     type: String,
     required: true,
@@ -11,6 +12,10 @@ const noteSchema = new mongoose.Schema({
     required: true,
   },
   important: Boolean,
+  user: {
+    type: Schema.Types.ObjectId,
+    ref: 'User',
+  },
 })
 
 noteSchema.set('toJSON', {
@@ -21,21 +26,5 @@ noteSchema.set('toJSON', {
   },
 })
 
-const Note = mongoose.model('Note', noteSchema)
+const Note = model('Note', noteSchema)
 module.exports = Note
-
-/*
-const mongoose = require('mongoose')
-require('../mongo.js')
-
-const {Schema, model} = mongoose
-
-const noteSchema = new Schema({
-  content: String,
-  date: Date,
-  important: Boolean,
-})
-
-const Note = model('note', noteSchema)
-module.exports = Note
-*/
