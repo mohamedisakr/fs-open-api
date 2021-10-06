@@ -3,8 +3,13 @@ const Note = require('../models/note')
 const User = require('../models/user')
 
 notesRouter.get('/', async (request, response) => {
-  const notes = await Note.find({}).lean().exec()
+  const notes = await Note.find({})
+    .populate('user', {username: 1, name: 1})
+    .lean()
+    .exec()
   response.json(notes)
+  // const notes = await Note.find({}).lean().exec()
+  // response.json(notes)
 })
 
 notesRouter.post('/', async (request, response) => {
