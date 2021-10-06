@@ -8,9 +8,9 @@ const uri = `${env.PROTOCOL}://${env.HOST}:${env.PORT}/${env.DATABASE_NAME}`
 const connectionOptions = {
   useNewUrlParser: true,
   useUnifiedTopology: true,
-  //   useFindAndModify: false,
-  //   useCreateIndex: true,
-  //   poolSize: 10, // default for MongoDB node.js driver
+  useFindAndModify: true,
+  useCreateIndex: true,
+  poolSize: 10, // default for MongoDB node.js driver
 }
 
 connect(uri, connectionOptions)
