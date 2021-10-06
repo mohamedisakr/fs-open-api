@@ -2,8 +2,20 @@ POST http://localhost:3001/api/notes/
 Content-Type: application/json
 
 {
- "content": "Browser can execute only Javascript",
-    "date": "2019-05-30T18:39:34.091Z",
-    "important": false
+    "content": "React Design Patterns",
+    "date": "2021-09-30T18:39:34.091Z",
+    "important": true,
+    "userId": "615dbac09a01445cd00c3f81"
 }
 
+### 
+
+POST http://localhost:3001/api/notes/
+Content-Type: application/json
+
+{
+    "content": "Scalable Node.js Application",
+    "date": "2021-12-1T18:39:34.091Z",
+    "important": true,
+    "userId": "615dbac09a01445cd00c3f81"
+}
