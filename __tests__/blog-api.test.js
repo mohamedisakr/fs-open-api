@@ -100,6 +100,21 @@ test('verifies if title & url are missing, responds to the request with status c
     .expect(400)
     .expect('Content-Type', /application\/json/)
 })
+
+test('delete blog succeeds with status code 204 if id is valid', async () => {
+  const blogsAtStart = await blogsInDb()
+  const blogToDelete = blogsAtStart[0]
+
+  await api.delete(`${url}/${blogToDelete.id}`).expect(204)
+
+  const blogsAtEnd = await blogsInDb()
+  const titles = blogsAtEnd.map((r) => r.title)
+
+  expect(blogsAtEnd.length).toBe(initialBlogs.length - 1)
+  expect(blogsAtEnd.length).toBe(blogsAtStart.length - 1)
+  expect(titles).not.toContain(blogToDelete.title)
+})
+
 afterAll(() => {
   mongoose.connection.close()
 })
