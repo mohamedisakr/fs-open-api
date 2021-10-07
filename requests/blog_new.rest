@@ -3,8 +3,7 @@ Content-Type: application/json
 Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Im1vaGFzYWtyIiwiaWQiOiI2MTVlN2I4MmE2YWFmNjdlN2Q5ZjllOGQiLCJpYXQiOjE2MzM2MDU3MTcsImV4cCI6MTYzMzYwOTMxN30.b2PHXjDLp5wCNa5XqjsMNA2_a9cuQ9zp7cnhgy7i9ks
 
 {
-    "title":"all things Javascript",
-    "author":"test author",
+    "title":"Principal Operations Developer",   
     "url":"https://fullstackopen.com",
     "likes":0
 }
