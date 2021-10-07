@@ -1,17 +1,17 @@
 POST http://localhost:3001/api/notes/
 Content-Type: application/json
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InJvb3QiLCJpZCI6IjYxNWU4MzA2YTg2NTQ2ODJjOTVhNTVhMSIsImlhdCI6MTYzMzU4Mzk1NH0.HX0Rsp9_N12IucB7tCzlBmlUSV14tDryw8BLjtcLLOs
 
 {
-    "content": "React Design Patterns",
-    "date": "2021-09-30T18:39:34.091Z",
-    "important": true,
-    "userId": "615dbac09a01445cd00c3f81"
+    "content": "Epic React",
+    "important": true    
 }
 
 ### 
 
 POST http://localhost:3001/api/notes/
 Content-Type: application/json
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InJvb3QiLCJpZCI6IjYxNWU4MzA2YTg2NTQ2ODJjOTVhNTVhMSIsImlhdCI6MTYzMzU4Mzk1NH0.HX0Rsp9_N12IucB7tCzlBmlUSV14tDryw8BLjtcLLOs
 
 {
     "content": "Scalable Node.js Application",
