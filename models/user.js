@@ -25,7 +25,10 @@ userSchema.set('toJSON', {
   },
 })
 
-userSchema.plugin(uniqueValidator)
+// cause this error
+// User validation failed: _id: Error, expected `_id` to be unique.
+// Value: `615e7b82a6aaf67e7d9f9e8d`
+// userSchema.plugin(uniqueValidator)
 const User = model('User', userSchema)
 
 module.exports = User
