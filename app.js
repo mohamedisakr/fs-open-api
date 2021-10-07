@@ -1,3 +1,4 @@
+require('dotenv').config()
 const config = require('./utils/config')
 const express = require('express')
 require('express-async-errors')
@@ -10,12 +11,9 @@ const loginRouter = require('./controllers/login')
 const middleware = require('./utils/middleware')
 const logger = require('./utils/logger')
 const mongoose = require('mongoose')
-// const {connectToDB} = require('./connection')
 
 const {connectionOptions} = require('./utils/constants')
 logger.info('connecting to', config.MONGODB_URI)
-
-// connectToDB()
 
 mongoose
   .connect(config.MONGODB_URI, connectionOptions)
