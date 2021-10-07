@@ -1,5 +1,16 @@
 POST http://localhost:3001/api/notes/
 Content-Type: application/json
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Im1vaGFzYWtyIiwiaWQiOiI2MTVlN2I4MmE2YWFmNjdlN2Q5ZjllOGQiLCJpYXQiOjE2MzM2MTA1MjksImV4cCI6MTYzMzYxNDEyOX0.-X0tf5xEBbMMeVmBEGimFcK2lMF9gKIohfgrIbo_w8o
+
+{
+    "content": "Node.js Security",
+    "important": true    
+}
+
+### 
+
+POST http://localhost:3001/api/notes/
+Content-Type: application/json
 Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Im1vaGFzYWtyIiwiaWQiOiI2MTVlN2I4MmE2YWFmNjdlN2Q5ZjllOGQiLCJpYXQiOjE2MzM1ODgwMDIsImV4cCI6MTYzMzU5MTYwMn0.5F2TBlbq-ybscRcdDOgQ9ZEMTC0UrQCeXIcw0m6r1Cc
 
 {
