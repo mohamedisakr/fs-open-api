@@ -13,6 +13,12 @@ const userSchema = new Schema({
       ref: 'Note',
     },
   ],
+  blogs: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: 'Blog',
+    },
+  ],
 })
 
 userSchema.set('toJSON', {
