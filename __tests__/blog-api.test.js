@@ -3,7 +3,7 @@ const supertest = require('supertest')
 const app = require('../app')
 const Blog = require('../models/blog')
 const {initialBlogs} = require('../fixtures/blogs.data')
-const {nonExistingId, blogsInDb} = require('./blog-helper')
+const {blogsInDb} = require('./blog-helper')
 
 const api = supertest(app)
 const url = '/api/blogs'

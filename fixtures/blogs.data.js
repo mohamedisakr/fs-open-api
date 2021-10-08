@@ -1,3 +1,5 @@
+const listEmpty = []
+
 const listWithOneBlog = [
   {
     _id: '5a422aa71b54a676234d17f8',
@@ -11,16 +13,18 @@ const listWithOneBlog = [
 
 const initialBlogs = [
   {
+    id: '5a422a851b54a676234d17f7',
     title: 'React patterns',
     author: 'Michael Chan',
     url: 'https://reactpatterns.com/',
     likes: 7,
   },
   {
-    title: 'First class tests',
-    author: 'Robert C. Martin',
-    url: 'http://blog.cleancoder.com/uncle-bob/2017/05/05/TestDefinitions.htmll',
-    likes: 10,
+    id: '5a422aa71b54a676234d17f8',
+    title: 'Go To Statement Considered Harmful',
+    author: 'Edsger W. Dijkstra',
+    url: 'http://www.u.arizona.edu/~rubinson/copyright_violations/Go_To_Considered_Harmful.html',
+    likes: 5,
   },
 ]
 
@@ -75,4 +79,21 @@ const blogs = [
   },
 ]
 
-module.exports = {listWithOneBlog, blogs, initialBlogs}
+module.exports = {listEmpty, listWithOneBlog, blogs, initialBlogs}
+
+/*
+const initialBlogs = [
+  {
+    title: 'React patterns',
+    author: 'Michael Chan',
+    url: 'https://reactpatterns.com/',
+    likes: 7,
+  },
+  {
+    title: 'First class tests',
+    author: 'Robert C. Martin',
+    url: 'http://blog.cleancoder.com/uncle-bob/2017/05/05/TestDefinitions.htmll',
+    likes: 10,
+  },
+]
+*/
