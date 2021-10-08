@@ -6,6 +6,7 @@ const api = supertest(app)
 const Blog = require('../models/blog')
 const User = require('../models/user')
 
+/*
 beforeEach(async () => {
   // Create a root user
   await User.deleteMany({})
@@ -18,11 +19,20 @@ beforeEach(async () => {
   // const promiseArray = noteObjects.map((blog) => blog.save())
   // await Promise.all(promiseArray)
 })
+*/
 
-describe('Get blog information', () => {
+describe.only('Get blog information', () => {
   let headers
 
   beforeEach(async () => {
+    // Create a root user
+    await User.deleteMany({})
+
+    // Create blogs without user
+    await Blog.deleteMany({})
+
+    await Blog.create(helper.initialBlogs)
+
     const newUser = {
       username: 'root',
       name: 'root',
@@ -32,6 +42,7 @@ describe('Get blog information', () => {
     await api.post('/api/users').send(newUser)
 
     const result = await api.post('/api/login').send(newUser)
+    console.log(`supertest request : ${result}`)
 
     headers = {
       Authorization: `bearer ${result.body.token}`,
