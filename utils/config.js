@@ -18,6 +18,7 @@ const LOGIN_URL = process.env.LOGIN_URL
 const NOTE_URL = process.env.NOTE_URL
 const PERSON_URL = process.env.PERSON_URL
 const USER_URL = process.env.USER_URL
+const INFO_URL = process.env.INFO_URL
 
 module.exports = {
   MONGODB_URI,
@@ -32,4 +33,5 @@ module.exports = {
   NOTE_URL,
   PERSON_URL,
   USER_URL,
+  INFO_URL,
 }

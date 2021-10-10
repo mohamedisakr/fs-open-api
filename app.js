@@ -38,13 +38,13 @@ app.use(middleware.tokenExtractor)
 // app.use(middleware.userExtractor)
 
 app.get('/', homeRouter)
-app.use('/api/notes', notesRouter)
 // app.use('/api/blogs', middleware.userExtractor, blogRouter)
-app.use('/api/blogs', blogRouter)
-app.use('/api/users', usersRouter)
-app.use('/api/login', loginRouter)
-app.use('/api/persons', personsRouter)
-app.use('/api/info', personsRouter)
+app.use(config.BLOG_URL, blogRouter) //'/api/blogs'
+app.use(config.NOTE_URL, notesRouter) //'/api/notes'
+app.use(config.USER_URL, usersRouter) //'/api/users'
+app.use(config.LOGIN_URL, loginRouter) //'/api/login'
+app.use(config.PERSON_URL, personsRouter) // '/api/persons'
+app.use(config.INFO_URL, personsRouter) //'/api/info'
 
 app.use(middleware.unknownEndpoint)
 app.use(middleware.errorHandler)
