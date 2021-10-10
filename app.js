@@ -1,10 +1,11 @@
 require('dotenv').config()
-const config = require('./utils/config')
 const express = require('express')
 require('express-async-errors')
-const app = express()
 const cors = require('cors')
+const morgan = require('morgan')
+const app = express()
 
+const config = require('./utils/config')
 const homeRouter = require('./controllers/home')
 const blogRouter = require('./controllers/blog')
 const usersRouter = require('./controllers/users')
@@ -29,10 +30,10 @@ mongoose
   })
 
 app.use(cors())
+app.use(morgan('combined'))
 app.use(express.static('build'))
 app.use(express.json())
 app.use(middleware.requestLogger)
-
 app.use(middleware.tokenExtractor)
 // app.use(middleware.userExtractor)
 
