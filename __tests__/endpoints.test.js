@@ -1,11 +1,8 @@
-const supertest = require('supertest')
-const app = require('../app')
-const api = supertest(app)
+const api = require('../utils/common')
 const config = require('../utils/config')
 
 describe('app endpoints', () => {
   test('home url', async () => {
-    // console.log(config.BASE_URL)
     await api
       .get('/')
       .expect(200)
