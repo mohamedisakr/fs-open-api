@@ -1,7 +1,7 @@
-const supertest = require('supertest')
-const app = require('../app')
-
-const api = supertest(app)
+// const supertest = require('supertest')
+// const app = require('../app')
+// const api = supertest(app)
+const api = require('../utils/common')
 const url = '/'
 
 describe('homepage endpoint', () => {
