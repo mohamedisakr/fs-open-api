@@ -26,6 +26,7 @@ app.get('/api/info', (request, response) => {
 })
 */
 
+/*
 const errorHandler = (error, request, response, next) => {
   console.error(error.message)
 
@@ -47,6 +48,6 @@ app.use(unknownEndpoint)
 
 // this has to be the last loaded middleware.
 app.use(errorHandler)
-
+*/
 const PORT = 3001
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`))

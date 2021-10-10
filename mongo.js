@@ -1,17 +1,9 @@
 const mongoose = require('mongoose')
-require('dotenv').config()
-
 const {connect, connection} = mongoose
-const {env} = process
-const uri = `${env.PROTOCOL}://${env.HOST}:${env.PORT}/${env.DATABASE_NAME}`
 
-const connectionOptions = {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-  useFindAndModify: true,
-  useCreateIndex: true,
-  poolSize: 10, // default for MongoDB node.js driver
-}
+const {PROTOCOL, HOST, DB_PORT, DATABASE_NAME} = require('./utils/config')
+const {connectionOptions} = require('./utils/constants')
+const uri = `${PROTOCOL}://${HOST}:${DB_PORT}/${DATABASE_NAME}`
 
 connect(uri, connectionOptions)
   .then(() => {
