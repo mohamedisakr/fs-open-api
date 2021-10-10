@@ -7,7 +7,7 @@ const url = '/api/persons'
 const info = '/api/info'
 
 describe('endpoint', () => {
-  test('should get # of persons', async () => {
+  test('should get persons info - # of persons', async () => {
     await api.get(info).expect(200)
   })
 
