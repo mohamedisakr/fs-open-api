@@ -1,11 +1,5 @@
-// const mongoose = require('mongoose')
-const supertest = require('supertest')
-const app = require('../app')
-
-const api = supertest(app)
+const api = require('../utils/common')
 const config = require('../utils/config')
-const url = '/api/persons'
-const info = '/api/info'
 
 describe('endpoint', () => {
   test('should get persons info - # of persons', async () => {
