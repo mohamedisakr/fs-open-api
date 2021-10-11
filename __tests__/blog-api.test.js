@@ -82,7 +82,7 @@ describe('blogs', () => {
     expect(theBlog.id).toBeDefined()
   })
 
-  test.only('verifies that making an HTTP POST successfully creates a new blog post.', async () => {
+  test('verifies that making an HTTP POST successfully creates a new blog post.', async () => {
     const newBlog = {
       title: 'async/await simplifies making async calls',
       author: globals.tokenId,
@@ -101,15 +101,16 @@ describe('blogs', () => {
     // expect(blogsAtEnd).toHaveLength(helper.initialBlogs.length + 1)
   })
 
-  test('verifies that if the likes property is missing, default to 0', async () => {
+  test.only('verifies that if the likes property is missing, default to 0', async () => {
     const newBlog = {
       title: 'Intro to Web API',
-      author: 'Mohamed Sakr',
+      author: globals.tokenId,
       url: 'example.com/intro-to-web-api',
     }
 
     await api
       .post(BLOG_URL)
+      .set('Authorization', globals.token)
       .send(newBlog)
       .expect(201)
       .expect('Content-Type', /application\/json/)
