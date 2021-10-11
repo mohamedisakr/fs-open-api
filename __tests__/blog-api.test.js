@@ -60,7 +60,7 @@ describe('blogs', () => {
   // named id, by default the database names the property _id.
   // Verifying the existence of a property is easily done with Jest's
   // toBeDefined matcher.
-  test.only('verifies that the unique identifier property of the blog posts is named id', async () => {
+  test('verifies that the unique identifier property of the blog posts is named id', async () => {
     const newBlog = {
       title: 'full stack is very interesting',
       author: globals.tokenId,
@@ -70,9 +70,9 @@ describe('blogs', () => {
 
     await api
       .post(BLOG_URL)
+      .set('Authorization', globals.token)
       .send(newBlog)
       .expect(201)
-      .set('Authorization', globals.token)
       .expect('Content-Type', /application\/json/)
 
     const allBlogs = await blogsInDb()
@@ -82,22 +82,23 @@ describe('blogs', () => {
     expect(theBlog.id).toBeDefined()
   })
 
-  test('verifies that making an HTTP POST successfully creates a new blog post.', async () => {
+  test.only('verifies that making an HTTP POST successfully creates a new blog post.', async () => {
     const newBlog = {
       title: 'async/await simplifies making async calls',
-      author: 'Mohamed Sakr',
+      author: globals.tokenId,
       url: 'example.com',
       likes: 0,
     }
 
     await api
       .post(BLOG_URL)
+      .set('Authorization', globals.token)
       .send(newBlog)
       .expect(201)
       .expect('Content-Type', /application\/json/)
 
-    const blogsAtEnd = await blogsInDb()
-    expect(blogsAtEnd).toHaveLength(initialBlogs.length + 1)
+    // const blogsAtEnd = await blogsInDb()
+    // expect(blogsAtEnd).toHaveLength(helper.initialBlogs.length + 1)
   })
 
   test('verifies that if the likes property is missing, default to 0', async () => {
