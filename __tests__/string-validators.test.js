@@ -51,3 +51,35 @@ describe('containsNumbers', () => {
     expect(actual).toBe(true)
   })
 })
+
+describe.only('containsSpecialChars', () => {
+  it('should return false, empty string', () => {
+    const actual = containsSpecialChars('')
+    expect(actual).toBe(false)
+  })
+
+  it('should return false, not containing numbers', () => {
+    const actual = containsSpecialChars('asdfg')
+    expect(actual).toBe(false)
+  })
+
+  it('should return false, containing numbers only', () => {
+    const actual = containsSpecialChars('9870')
+    expect(actual).toBe(false)
+  })
+
+  it('should return false, containing letters with numbers', () => {
+    const actual = containsSpecialChars('qwer1234')
+    expect(actual).toBe(false)
+  })
+
+  it('should return true, containing 1 special char', () => {
+    const actual = containsSpecialChars('qwer@1234')
+    expect(actual).toBe(true)
+  })
+
+  it('should return true, containing more than 1 special char', () => {
+    const actual = containsSpecialChars('qwer@1234^%')
+    expect(actual).toBe(true)
+  })
+})
