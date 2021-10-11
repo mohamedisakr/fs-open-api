@@ -1,6 +1,6 @@
 const bcrypt = require('bcrypt')
 const User = require('../models/user')
-const {usersInDb, generateNewUserFaker} = require('./user-helper')
+const {getUsersInDb, generateNewUserFaker} = require('./user-helper')
 // const {initialNotes} = require('../fixtures/notes-data')
 const api = require('../utils/common')
 const config = require('../utils/config')
@@ -26,9 +26,9 @@ describe('restrictions to creating new users', () => {
   })
 })
 
-describe('when there is initially one user in db', () => {
+describe.only('when there is initially one user in db', () => {
   beforeEach(async () => {
-    await User.deleteMany({})
+    await User.deleteMany({}).lean().exec()
 
     // {username: 'root', name: 'Superuser', password: 'salainen'}
     // const passwordHash = await bcrypt.hash('sekret', 10)
@@ -50,11 +50,11 @@ describe('when there is initially one user in db', () => {
     const newUser = generateNewUserFaker()
     console.log(newUser)
 
-    await api.post(config.USER_URL).send(newUser).expect(200)
+    await api.post(config.USER_URL).send(newUser).expect(201)
   })
 
   test('creation fails with proper status code and message if username already taken', async () => {
-    const usersAtStart = await usersInDb()
+    const usersAtStart = await getUsersInDb()
 
     const newUser = {username: 'root', name: 'Superuser', password: 'salainen'}
 
@@ -66,7 +66,7 @@ describe('when there is initially one user in db', () => {
 
     expect(result.body.error).toContain('username must be unique')
 
-    const usersAtEnd = await usersInDb()
+    const usersAtEnd = await getUsersInDb()
     expect(usersAtEnd).toHaveLength(usersAtStart.length)
   })
 })
