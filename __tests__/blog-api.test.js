@@ -1,41 +1,69 @@
+const jwt = require('jsonwebtoken')
 const mongoose = require('mongoose')
+const User = require('../models/user')
 const Blog = require('../models/blog')
-const {initialBlogs} = require('../fixtures/blogs.data')
+// const {initialBlogs} = require('../fixtures/blogs.data')
 const {blogsInDb} = require('./blog-helper')
-const {getUsersInDb} = require('./user-helper')
+// const {getUsersInDb} = require('./user-helper')
+const helper = require('./test_helper')
 
 const api = require('../utils/common') //supertest(app)
-const {BLOG_URL} = require('../utils/config') //'/api/blogs'
+const {SECRET, BLOG_URL} = require('../utils/config') //'/api/blogs'
 
 describe('blogs', () => {
+  let globals = {}
+
   beforeEach(async () => {
+    await User.deleteMany({})
     await Blog.deleteMany({})
-    // create user and get its token
-    // extract user id from token
-    // update each item author in initialBlogs to user id
-    await Blog.create(initialBlogs)
+
+    const newUsers = await User.create(helper.initialUsers)
+    const savedUsers = await helper.getUsersInDb()
+
+    const userForAllBlogs = {
+      username: savedUsers[0].username,
+      id: savedUsers[0].id,
+    }
+
+    const userForNoBlogs = {
+      username: savedUsers[1].username,
+      id: savedUsers[1].id,
+    }
+
+    const token = await jwt.sign(userForAllBlogs, SECRET)
+    const unauthorizedToken = await jwt.sign(userForNoBlogs, SECRET)
+
+    globals.token = `Bearer ${token}`
+    globals.tokenId = userForAllBlogs.id
+    globals.unauthorizedToken = `Bearer ${unauthorizedToken}`
+
+    const validUserId = savedUsers[0].id
+
+    const newBlogs = helper.initialBlogs.map((blog) => ({
+      ...blog,
+      author: validUserId,
+    }))
+
+    await Blog.create(newBlogs)
   })
 
-  test.only('blogs are returned as json', async () => {
-    await api
-      .get(BLOG_URL)
-      .expect(200)
-      .expect('Content-Type', /application\/json/)
+  test('blogs are returned as json', async () => {
+    await api.get(BLOG_URL).expect(200).expect('Content-Type', /json/) ///application\
   })
 
   test('all blogs are returned', async () => {
     const response = await api.get(BLOG_URL)
-    expect(response.body).toHaveLength(initialBlogs.length)
+    expect(response.body).toHaveLength(helper.initialBlogs.length) //(initialBlogs.length)
   })
 
   // verifies that the unique identifier property of the blog posts is
   // named id, by default the database names the property _id.
   // Verifying the existence of a property is easily done with Jest's
   // toBeDefined matcher.
-  test('verifies that the unique identifier property of the blog posts is named id', async () => {
+  test.only('verifies that the unique identifier property of the blog posts is named id', async () => {
     const newBlog = {
       title: 'full stack is very interesting',
-      author: 'Mohamed Sakr',
+      author: globals.tokenId,
       url: 'example.com',
       likes: 0,
     }
@@ -44,6 +72,7 @@ describe('blogs', () => {
       .post(BLOG_URL)
       .send(newBlog)
       .expect(201)
+      .set('Authorization', globals.token)
       .expect('Content-Type', /application\/json/)
 
     const allBlogs = await blogsInDb()

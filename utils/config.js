@@ -23,6 +23,9 @@ const INFO_URL = process.env.INFO_URL
 // the number of rounds that the bcrypt will go through to hash data
 const SALT_ROUNDS = process.env.SALT_ROUNDS
 
+// secret key
+const SECRET = process.env.SECRET
+
 module.exports = {
   MONGODB_URI,
   PORT,
@@ -37,4 +40,6 @@ module.exports = {
   PERSON_URL,
   USER_URL,
   INFO_URL,
+  SALT_ROUNDS,
+  SECRET,
 }
