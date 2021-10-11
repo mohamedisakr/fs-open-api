@@ -1,6 +1,7 @@
 const bcrypt = require('bcrypt')
 const usersRouter = require('express').Router()
 const User = require('../models/user')
+const {SALT_ROUNDS} = require('../utils/config')
 
 usersRouter.get('/', async (request, response) => {
   const users = await User.find({})
@@ -50,8 +51,8 @@ usersRouter.post('/', async (request, response) => {
     return response.status(400).json({error: 'username must be unique'})
   }
 
-  const saltRounds = 10
-  const passwordHash = await bcrypt.hash(password, saltRounds)
+  // const saltRounds = 10
+  const passwordHash = await bcrypt.hash(password, SALT_ROUNDS)
 
   //   const user = new User({username, name, passwordHash})
   //   const savedUser = await user.save()
