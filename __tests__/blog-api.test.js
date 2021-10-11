@@ -101,7 +101,7 @@ describe('blogs', () => {
     // expect(blogsAtEnd).toHaveLength(helper.initialBlogs.length + 1)
   })
 
-  test.only('verifies that if the likes property is missing, default to 0', async () => {
+  test('verifies that if the likes property is missing, default to 0', async () => {
     const newBlog = {
       title: 'Intro to Web API',
       author: globals.tokenId,
@@ -122,11 +122,12 @@ describe('blogs', () => {
     expect(theBlog.likes).toBe(0)
   })
 
-  test('verifies if title & url are missing, responds to the request with status code 400 Bad Request', async () => {
-    const newBlog = {author: 'Mohamed Sakr'}
+  test.only('verifies if title & url are missing, responds to the request with status code 400 Bad Request', async () => {
+    const newBlog = {author: globals.tokenId}
 
     await api
       .post(BLOG_URL)
+      .set('Authorization', globals.token)
       .send(newBlog)
       .expect(400)
       .expect('Content-Type', /application\/json/)
