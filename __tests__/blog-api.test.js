@@ -133,7 +133,20 @@ describe('blogs', () => {
       .expect('Content-Type', /application\/json/)
   })
 
-  test('delete blog succeeds with status code 204 if id is valid', async () => {
+  test.only('fails with status 401 if unauthenticated', async () => {
+    const blogsAtStart = await helper.getBlogsInDb()
+    const blogToDelete = blogsAtStart[0]
+
+    await api
+      .delete(`${BLOG_URL}/${blogToDelete.id}`)
+      .set('Authorization', globals.token)
+      .send()
+      .expect(401)
+    // .set('Authorization', `Bearer ${globals.token}`)
+    // .set('x-auth-token', globals.token)
+  })
+
+  test('succeeds with status code 204 if id is valid', async () => {
     const blogsAtStart = await blogsInDb()
     const blogToDelete = blogsAtStart[0]
 
@@ -150,11 +163,11 @@ describe('blogs', () => {
     // expect(titles).not.toContain(blogToDelete.title)
   })
 
-  test.only('update blog success with status code 200', async () => {
+  test('update blog success with status code 200', async () => {
     const blogsAtStart = await blogsInDb()
-    console.log(`all blogs : ${blogsAtStart}`)
+    // console.log(`all blogs : ${blogsAtStart}`)
     const firstBlog = blogsAtStart[0]
-    console.log(`first blog : ${firstBlog}`)
+    // console.log(`first blog : ${firstBlog}`)
     const blogToUpdate = {...firstBlog, likes: 5}
     await api
       .put(`${BLOG_URL}/${firstBlog.id}`)
