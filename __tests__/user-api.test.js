@@ -5,28 +5,33 @@ const {getUsersInDb, generateNewUserFaker} = require('./user-helper')
 const api = require('../utils/common')
 const config = require('../utils/config')
 
-describe('restrictions to creating new users', () => {
+describe.only('restrictions to creating new users', () => {
   beforeEach(async () => {
     await User.deleteMany({}).lean().exec()
   })
 
   test('both username and password must be given', async () => {
     const newUser = {username: 'root'}
-    const result = await api.post(config.USER_URL).send(newUser).expect(400)
+    await api.post(config.USER_URL).send(newUser).expect(400)
+  })
+
+  test('no username nor password given', async () => {
+    const newUser = {}
+    await api.post(config.USER_URL).send(newUser).expect(400)
   })
 
   test('both username and password must be at least 3 characters long', async () => {
     const newUser = {username: 'ro', password: 'ot'}
-    const result = await api.post(config.USER_URL).send(newUser).expect(400)
+    await api.post(config.USER_URL).send(newUser).expect(400)
   })
 
   test('username must be unique', async () => {
     const newUser = {username: 'ro', password: 'ot'}
-    const result = await api.post(config.USER_URL).send(newUser).expect(400)
+    await api.post(config.USER_URL).send(newUser).expect(400)
   })
 })
 
-describe.only('when there is initially one user in db', () => {
+describe('when there is initially one user in db', () => {
   beforeEach(async () => {
     await User.deleteMany({}).lean().exec()
 

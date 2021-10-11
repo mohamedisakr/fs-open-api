@@ -46,7 +46,10 @@ const containsSpecialChars = (str) => {
  * @returns
  */
 const hasMinimumLength = (str, min) => {
-  return str.length >= min
+  if (str.length >= min) {
+    return true
+  }
+  return false
 }
 
 /**
@@ -70,6 +73,26 @@ const hasMinimumAndMaximumLength = (str, min, max) => {
   return str.length >= min && str.length <= max
 }
 
+/**
+ * checking if a variable is falsey or if it has length attribute
+ * equal to zero (which for a string, means it is empty)
+ * @param {*} str
+ * @returns text to check
+ */
+const isEmpty = (str) => {
+  return !str || str.length === 0
+}
+
+/**
+ * checking if a variable is falsey or if the string only contains
+ * whitespace or is empty
+ * @param {*} str text to check
+ * @returns
+ */
+const isBlank = (str) => {
+  return !str || /^\s*$/.test(str)
+}
+
 module.exports = {
   toChars,
   containsLetters,
@@ -78,6 +101,8 @@ module.exports = {
   hasMinimumLength,
   containsWhiteSpaces,
   hasMinimumAndMaximumLength,
+  isEmpty,
+  isBlank,
 }
 
 // let str = 'the lazy dog *&^ run over big fox ??!!'
