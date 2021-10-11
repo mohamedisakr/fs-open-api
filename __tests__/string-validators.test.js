@@ -52,7 +52,7 @@ describe('containsNumbers', () => {
   })
 })
 
-describe.only('containsSpecialChars', () => {
+describe('containsSpecialChars', () => {
   it('should return false, empty string', () => {
     const actual = containsSpecialChars('')
     expect(actual).toBe(false)
@@ -81,5 +81,22 @@ describe.only('containsSpecialChars', () => {
   it('should return true, containing more than 1 special char', () => {
     const actual = containsSpecialChars('qwer@1234^%')
     expect(actual).toBe(true)
+  })
+})
+
+describe.only('hasMinimumLength', () => {
+  it('should return false, empty string', () => {
+    const actual = hasMinimumLength('', 3)
+    expect(actual).toBe(false)
+  })
+
+  it('should return true, string with more than min', () => {
+    const actual = hasMinimumLength('username', 7)
+    expect(actual).toBe(true)
+  })
+
+  it('should return false, string with less than min', () => {
+    const actual = hasMinimumLength('tola', 7)
+    expect(actual).toBe(false)
   })
 })
