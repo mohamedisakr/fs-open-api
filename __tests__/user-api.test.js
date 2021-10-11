@@ -29,6 +29,11 @@ describe.only('restrictions to creating new users', () => {
     const newUser = {username: 'ro', password: 'ot'}
     await api.post(config.USER_URL).send(newUser).expect(400)
   })
+
+  test('should return 400, if contains empty spaces', async () => {
+    const newUser = {username: '     ', password: '     '}
+    await api.post(config.USER_URL).send(newUser).expect(400)
+  })
 })
 
 describe('when there is initially one user in db', () => {

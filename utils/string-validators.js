@@ -80,7 +80,7 @@ const hasMinimumAndMaximumLength = (str, min, max) => {
  * @returns text to check
  */
 const isEmpty = (str) => {
-  return !str || str.length === 0
+  return !str || str.trim().length === 0
 }
 
 /**

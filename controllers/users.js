@@ -2,7 +2,11 @@ const bcrypt = require('bcrypt')
 const usersRouter = require('express').Router()
 const User = require('../models/user')
 const {SALT_ROUNDS} = require('../utils/config')
-const {hasMinimumLength, isEmpty} = require('../utils/string-validators')
+const {
+  hasMinimumLength,
+  isEmpty,
+  isBlank,
+} = require('../utils/string-validators')
 
 usersRouter.post('/', async (request, response) => {
   const {username, name, password} = request.body
