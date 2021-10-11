@@ -84,7 +84,7 @@ describe('containsSpecialChars', () => {
   })
 })
 
-describe.only('hasMinimumLength', () => {
+describe('hasMinimumLength', () => {
   it('should return false, empty string', () => {
     const actual = hasMinimumLength('', 3)
     expect(actual).toBe(false)
@@ -98,5 +98,22 @@ describe.only('hasMinimumLength', () => {
   it('should return false, string with less than min', () => {
     const actual = hasMinimumLength('tola', 7)
     expect(actual).toBe(false)
+  })
+})
+
+describe.only('containsWhiteSpaces', () => {
+  it('should return false, empty string', () => {
+    const actual = containsWhiteSpaces('')
+    expect(actual).toBe(false)
+  })
+
+  it('should return false, string without spaces', () => {
+    const actual = containsWhiteSpaces('thelazydog')
+    expect(actual).toBe(false)
+  })
+
+  it('should return true, string without spaces', () => {
+    const actual = containsWhiteSpaces('the lazy dog')
+    expect(actual).toBe(true)
   })
 })
