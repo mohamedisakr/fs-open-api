@@ -1,7 +1,7 @@
 const faker = require('faker')
 const User = require('../models/user')
 
-const usersInDb = async () => {
+const getUsersInDb = async () => {
   const users = await User.find({})
   return users.map((user) => user.toJSON())
 }
@@ -14,7 +14,7 @@ const generateNewUserFaker = () => {
   }
 }
 
-module.exports = {usersInDb, generateNewUserFaker}
+module.exports = {getUsersInDb, generateNewUserFaker}
 
 // const newUser = {
 //   username: 'mluukkai',

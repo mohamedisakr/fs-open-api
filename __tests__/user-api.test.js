@@ -26,7 +26,7 @@ describe('restrictions to creating new users', () => {
   })
 })
 
-describe.only('when there is initially one user in db', () => {
+describe('when there is initially one user in db', () => {
   beforeEach(async () => {
     await User.deleteMany({})
 

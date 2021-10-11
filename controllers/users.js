@@ -4,6 +4,7 @@ const User = require('../models/user')
 
 usersRouter.get('/', async (request, response) => {
   const users = await User.find({})
+    .select({passwordHash: false}) // exclude `passwordHash`
     .populate('notes', {content: 1, date: 1})
     .populate('blogs', {title: 1, likes: 1})
     .lean()
