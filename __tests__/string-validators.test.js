@@ -101,7 +101,7 @@ describe('hasMinimumLength', () => {
   })
 })
 
-describe.only('containsWhiteSpaces', () => {
+describe('containsWhiteSpaces', () => {
   it('should return false, empty string', () => {
     const actual = containsWhiteSpaces('')
     expect(actual).toBe(false)
@@ -115,5 +115,22 @@ describe.only('containsWhiteSpaces', () => {
   it('should return true, string without spaces', () => {
     const actual = containsWhiteSpaces('the lazy dog')
     expect(actual).toBe(true)
+  })
+})
+
+describe.only('hasMinimumAndMaximumLength', () => {
+  it('should return false, empty string', () => {
+    const actual = hasMinimumAndMaximumLength('', 3, 8)
+    expect(actual).toBe(false)
+  })
+
+  it('should return true, string with more than min and less than max', () => {
+    const actual = hasMinimumAndMaximumLength('the lazy dog', 3, 12)
+    expect(actual).toBe(true)
+  })
+
+  it('should return false, string with more than min and less than max', () => {
+    const actual = hasMinimumAndMaximumLength('Kamryn_Rodriguez82', 3, 10)
+    expect(actual).toBe(false)
   })
 })
