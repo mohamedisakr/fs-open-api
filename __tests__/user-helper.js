@@ -1,3 +1,4 @@
+const faker = require('faker')
 const User = require('../models/user')
 
 const usersInDb = async () => {
@@ -5,4 +6,18 @@ const usersInDb = async () => {
   return users.map((user) => user.toJSON())
 }
 
-module.exports = {usersInDb}
+const generateNewUserFaker = () => {
+  return {
+    username: faker.internet.userName(),
+    name: `${faker.name.firstName()} ${faker.name.lastName()}`,
+    password: faker.internet.password(),
+  }
+}
+
+module.exports = {usersInDb, generateNewUserFaker}
+
+// const newUser = {
+//   username: 'mluukkai',
+//   name: 'Matti Luukkainen',
+//   password: 'salainen',
+// }

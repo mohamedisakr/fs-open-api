@@ -1,13 +1,15 @@
 const bcrypt = require('bcrypt')
-const mongoose = require('mongoose')
-const supertest = require('supertest')
-const app = require('../app')
 const User = require('../models/user')
+const {usersInDb, generateNewUserFaker} = require('./user-helper')
+// const faker = require('faker')
+// const supertest = require('supertest')
+// const app = require('../app')
+// const mongoose = require('mongoose')
 // const {initialNotes} = require('../fixtures/notes-data')
-const {usersInDb} = require('./user-helper')
 
-const api = supertest(app)
-const url = '/api/users'
+const api = require('../utils/common')
+const config = require('../utils/config')
+// const url = '/api/users'
 
 describe('restrictions to creating new users', () => {
   beforeEach(async () => {
@@ -16,17 +18,17 @@ describe('restrictions to creating new users', () => {
 
   test('both username and password must be given', async () => {
     const newUser = {username: 'root'}
-    const result = await api.post(url).send(newUser).expect(400)
+    const result = await api.post(config.USER_URL).send(newUser).expect(400)
   })
 
   test('both username and password must be at least 3 characters long', async () => {
     const newUser = {username: 'ro', password: 'ot'}
-    const result = await api.post(url).send(newUser).expect(400)
+    const result = await api.post(config.USER_URL).send(newUser).expect(400)
   })
 
   test('username must be unique', async () => {
     const newUser = {username: 'ro', password: 'ot'}
-    const result = await api.post(url).send(newUser).expect(400)
+    const result = await api.post(config.USER_URL).send(newUser).expect(400)
   })
 })
 
@@ -34,30 +36,24 @@ describe('when there is initially one user in db', () => {
   beforeEach(async () => {
     await User.deleteMany({})
 
-    const passwordHash = await bcrypt.hash('sekret', 10)
-    await User.create({username: 'root', passwordHash})
+    // const passwordHash = await bcrypt.hash('sekret', 10)
+    // await User.create({username: 'root', passwordHash})
   })
 
   test('creation succeeds with a fresh username', async () => {
     // const usersAtStart = await usersInDb()
-
-    const newUser = {
-      username: 'mluukkai',
-      name: 'Matti Luukkainen',
-      password: 'salainen',
-    }
-
-    await api
-      .post(url)
-      .send(newUser)
-      .expect(200)
-      .expect('Content-Type', /application\/json/)
+    // .expect('Content-Type', /application\/json/)
 
     // const usersAtEnd = await usersInDb()
     // expect(usersAtEnd).toHaveLength(usersAtStart.length + 1)
 
     // const usernames = usersAtEnd.map((u) => u.username)
     // expect(usernames).toContain(newUser.username)
+
+    const newUser = generateNewUserFaker()
+    console.log(newUser)
+
+    await api.post(config.USER_URL).send(newUser).expect(200)
   })
 
   test('creation fails with proper status code and message if username already taken', async () => {
@@ -66,7 +62,7 @@ describe('when there is initially one user in db', () => {
     const newUser = {username: 'root', name: 'Superuser', password: 'salainen'}
 
     const result = await api
-      .post(url)
+      .post(config.USER_URL)
       .send(newUser)
       .expect(400)
       .expect('Content-Type', /application\/json/)

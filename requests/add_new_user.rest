@@ -2,6 +2,16 @@
 POST http://localhost:3001/api/users
 Content-Type: application/json
 
+ {                             
+   "username": "Marjolaine.Jacobi70",
+   "name": "Margaret Lesch",     
+   "password": "KpNGdyGLSBmLJUI" 
+ } 
+
+###
+POST http://localhost:3001/api/users
+Content-Type: application/json
+
 {
     "username": "mohasakr",
     "name": "Mohamed Sakr",
