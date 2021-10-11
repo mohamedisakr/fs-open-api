@@ -1,15 +1,9 @@
 const bcrypt = require('bcrypt')
 const User = require('../models/user')
 const {usersInDb, generateNewUserFaker} = require('./user-helper')
-// const faker = require('faker')
-// const supertest = require('supertest')
-// const app = require('../app')
-// const mongoose = require('mongoose')
 // const {initialNotes} = require('../fixtures/notes-data')
-
 const api = require('../utils/common')
 const config = require('../utils/config')
-// const url = '/api/users'
 
 describe('restrictions to creating new users', () => {
   beforeEach(async () => {
@@ -32,15 +26,18 @@ describe('restrictions to creating new users', () => {
   })
 })
 
-describe('when there is initially one user in db', () => {
+describe.only('when there is initially one user in db', () => {
   beforeEach(async () => {
     await User.deleteMany({})
 
+    // {username: 'root', name: 'Superuser', password: 'salainen'}
     // const passwordHash = await bcrypt.hash('sekret', 10)
-    // await User.create({username: 'root', passwordHash})
+    const passwordHash = await bcrypt.hash('salainen', 10)
+    await User.create({username: 'root', name: 'Superuser', passwordHash})
   })
 
   test('creation succeeds with a fresh username', async () => {
+    //#region
     // const usersAtStart = await usersInDb()
     // .expect('Content-Type', /application\/json/)
 
@@ -49,7 +46,7 @@ describe('when there is initially one user in db', () => {
 
     // const usernames = usersAtEnd.map((u) => u.username)
     // expect(usernames).toContain(newUser.username)
-
+    //#endregion
     const newUser = generateNewUserFaker()
     console.log(newUser)
 

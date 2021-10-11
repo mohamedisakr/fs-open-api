@@ -43,7 +43,8 @@ usersRouter.post('/', async (request, response) => {
   }
 
   // The username must be unique.
-  const duplicatedUser = await User.find({username: username}).lean().exec()
+  const duplicatedUser = await User.findOne({username: username}).lean().exec()
+  console.log(`duplicated user : ${duplicatedUser}`)
   if (duplicatedUser) {
     return response.status(400).json({error: 'username must be unique'})
   }
@@ -55,7 +56,7 @@ usersRouter.post('/', async (request, response) => {
   //   const savedUser = await user.save()
 
   const savedUser = User.create({username, name, passwordHash})
-  response.json(savedUser)
+  response.status(200).json(savedUser)
 })
 
 module.exports = usersRouter
