@@ -13,7 +13,7 @@ const usersRouter = require('./controllers/users')
 const notesRouter = require('./controllers/notes')
 const loginRouter = require('./controllers/login')
 const personsRouter = require('./controllers/persons')
-const registerRouter = require('./controllers/register')
+// const registerRouter = require('./controllers/register')
 
 const middleware = require('./utils/middleware')
 const logger = require('./utils/logger')
