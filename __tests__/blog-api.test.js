@@ -1,3 +1,4 @@
+/*
 const jwt = require('jsonwebtoken')
 const mongoose = require('mongoose')
 const api = require('../utils/common')
@@ -10,7 +11,7 @@ const helper = require('./test_helper')
 
 const {SECRET, BLOG_URL} = require('../utils/config') //'/api/blogs'
 
-describe('blogs', () => {
+describe.skip('blogs', () => {
   let globals = {}
 
   beforeEach(async () => {
@@ -186,3 +187,4 @@ describe('blogs', () => {
     mongoose.connection.close()
   })
 })
+*/

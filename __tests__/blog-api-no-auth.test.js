@@ -1,3 +1,4 @@
+/*
 const mongoose = require('mongoose')
 const helper = require('./test_helper')
 const supertest = require('supertest')
@@ -6,22 +7,22 @@ const api = supertest(app)
 const Blog = require('../models/blog')
 const User = require('../models/user')
 
-/*
-beforeEach(async () => {
-  // Create a root user
-  await User.deleteMany({})
 
-  // Create blogs without user
-  await Blog.deleteMany({})
+// beforeEach(async () => {
+//   // Create a root user
+//   await User.deleteMany({})
 
-  await Blog.create(helper.initialBlogs)
-  // const noteObjects = helper.initialBlogs.map((blog) => new Blog(blog))
-  // const promiseArray = noteObjects.map((blog) => blog.save())
-  // await Promise.all(promiseArray)
-})
-*/
+//   // Create blogs without user
+//   await Blog.deleteMany({})
 
-describe.only('Get blog information', () => {
+//   await Blog.create(helper.initialBlogs)
+//   // const noteObjects = helper.initialBlogs.map((blog) => new Blog(blog))
+//   // const promiseArray = noteObjects.map((blog) => blog.save())
+//   // await Promise.all(promiseArray)
+// })
+
+
+describe.skip('Get blog information', () => {
   let headers
 
   beforeEach(async () => {
@@ -78,7 +79,7 @@ describe.only('Get blog information', () => {
   })
 })
 
-describe('Addition of a new blog', () => {
+describe.skip('Addition of a new blog', () => {
   let headers = null
   let result = null
 
@@ -159,7 +160,7 @@ describe('Addition of a new blog', () => {
   })
 })
 
-describe('Update a blog', () => {
+describe.skip('Update a blog', () => {
   let headers
 
   beforeEach(async () => {
@@ -189,31 +190,29 @@ describe('Update a blog', () => {
     // await api.post('/api/blogs').send(newBlog).set(headers).expect(200)
     await api.post('/api/blogs').send(newBlog).set(headers).expect(401)
 
-    /*
-    const allBlogs = await helper.blogsInDb()
-    const blogToUpdate = allBlogs.find((blog) => blog.title === newBlog.title)
+    // const allBlogs = await helper.blogsInDb()
+    // const blogToUpdate = allBlogs.find((blog) => blog.title === newBlog.title)
 
-    const updatedBlog = {
-      ...blogToUpdate,
-      likes: blogToUpdate.likes + 1,
-    }
+    // const updatedBlog = {
+    //   ...blogToUpdate,
+    //   likes: blogToUpdate.likes + 1,
+    // }
 
-    await api
-      .put(`/api/blogs/${blogToUpdate.id}`)
-      .send(updatedBlog)
-      .set(headers)
-      .expect(200)
-      .expect('Content-Type', /application\/json/)
+    // await api
+    //   .put(`/api/blogs/${blogToUpdate.id}`)
+    //   .send(updatedBlog)
+    //   .set(headers)
+    //   .expect(200)
+    //   .expect('Content-Type', /application\/json/)
 
-    const blogsAtEnd = await helper.blogsInDb()
-    expect(blogsAtEnd).toHaveLength(helper.initialBlogs.length + 1)
-    const foundBlog = blogsAtEnd.find((blog) => blog.likes === 13)
-    expect(foundBlog.likes).toBe(13)
-    */
+    // const blogsAtEnd = await helper.blogsInDb()
+    // expect(blogsAtEnd).toHaveLength(helper.initialBlogs.length + 1)
+    // const foundBlog = blogsAtEnd.find((blog) => blog.likes === 13)
+    // expect(foundBlog.likes).toBe(13)
   })
 })
 
-describe('Deletion of a blog', () => {
+describe.skip('Deletion of a blog', () => {
   let headers
 
   beforeEach(async () => {
@@ -243,23 +242,22 @@ describe('Deletion of a blog', () => {
     // await api.post('/api/blogs').send(newBlog).set(headers).expect(200)
     await api.post('/api/blogs').send(newBlog).set(headers).expect(401)
 
-    /*
-    const allBlogs = await helper.blogsInDb()
-    const blogToDelete = allBlogs.find((blog) => blog.title === newBlog.title)
+    // const allBlogs = await helper.blogsInDb()
+    // const blogToDelete = allBlogs.find((blog) => blog.title === newBlog.title)
 
-    await api.delete(`/api/blogs/${blogToDelete.id}`).set(headers).expect(204)
+    // await api.delete(`/api/blogs/${blogToDelete.id}`).set(headers).expect(204)
 
-    const blogsAtEnd = await helper.blogsInDb()
+    // const blogsAtEnd = await helper.blogsInDb()
 
-    expect(blogsAtEnd).toHaveLength(helper.initialBlogs.length)
+    // expect(blogsAtEnd).toHaveLength(helper.initialBlogs.length)
 
-    const contents = blogsAtEnd.map((r) => r.title)
+    // const contents = blogsAtEnd.map((r) => r.title)
 
-    expect(contents).not.toContain(blogToDelete.title)
-    */
+    // expect(contents).not.toContain(blogToDelete.title)
   })
 })
 
 afterAll(() => {
   mongoose.connection.close()
 })
+*/

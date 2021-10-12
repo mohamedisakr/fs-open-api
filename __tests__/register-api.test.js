@@ -1,3 +1,4 @@
+/*
 const bcrypt = require('bcrypt')
 const User = require('../models/user')
 const {getUsersInDb, generateNewUserFaker} = require('./user-helper')
@@ -80,3 +81,4 @@ describe.only('when there is initially one user in db', () => {
     expect(usersAtEnd).toHaveLength(usersAtStart.length)
   })
 })
+*/
