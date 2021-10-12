@@ -1,17 +1,15 @@
 const mongoose = require('mongoose')
-const supertest = require('supertest')
-const app = require('../app')
 const Note = require('../models/note')
 const {initialNotes} = require('../fixtures/notes-data')
 const {nonExistingId, notesInDb} = require('./note-helper')
+const {config} = require('../utils/config')
 
-const api = supertest(app)
-const url = '/api/notes'
+const api = require('../utils/common') //supertest(app)
+const url = config.NOTE_URL // '/api/notes'
 
-describe('when there is initially some notes saved', () => {
+describe.only('when there is initially some notes saved', () => {
   beforeEach(async () => {
     await Note.deleteMany({})
-    // await Note.insertMany(initialNotes)
     await Note.create(initialNotes)
   })
 
