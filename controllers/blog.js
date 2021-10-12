@@ -5,9 +5,11 @@ const User = require('../models/user')
 
 blogRouter.get('/', async (request, response) => {
   try {
-    const blogs = await Blog.find({}).lean().exec()
+    const blogs = await Blog.find({})
+      // .populate('user', {name: 1})
+      .lean()
+      .exec()
     response.json(blogs)
-    // .populate('author', {name: 1})
     // .select({author: false})
   } catch (error) {
     console.error(error)
@@ -22,12 +24,15 @@ blogRouter.post('/', async (request, response) => {
   }
   const user = await User.findById(decodedToken.id)
 
-  const blog = new Blog({
+  console.log(`user : ${user}`)
+
+  const blogNewObject = {
     title: body.title,
     url: body.url,
     likes: body.likes,
-    author: user._id,
-  })
+    user: user._id,
+  }
+  const blog = new Blog(blogNewObject)
 
   const savedBlog = await blog.save()
   user.blogs = user.blogs.concat(savedBlog._id)

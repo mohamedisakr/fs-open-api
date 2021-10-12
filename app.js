@@ -13,6 +13,7 @@ const usersRouter = require('./controllers/users')
 const notesRouter = require('./controllers/notes')
 const loginRouter = require('./controllers/login')
 const personsRouter = require('./controllers/persons')
+const registerRouter = require('./controllers/register')
 
 const middleware = require('./utils/middleware')
 const logger = require('./utils/logger')
@@ -40,10 +41,11 @@ app.use(middleware.tokenExtractor)
 
 app.get('/', homeRouter)
 // app.use('/api/blogs', middleware.userExtractor, blogRouter)
+app.use(config.REGISTER_URL, usersRouter) //'/api/register'
+app.use(config.LOGIN_URL, loginRouter) //'/api/login'
+app.use(config.USER_URL, usersRouter) //'/api/users'
 app.use(config.BLOG_URL, blogRouter) //'/api/blogs'
 app.use(config.NOTE_URL, notesRouter) //'/api/notes'
-app.use(config.USER_URL, usersRouter) //'/api/users'
-app.use(config.LOGIN_URL, loginRouter) //'/api/login'
 app.use(config.PERSON_URL, personsRouter) // '/api/persons'
 app.use(config.INFO_URL, personsRouter) //'/api/info'
 

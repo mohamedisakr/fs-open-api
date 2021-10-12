@@ -19,6 +19,7 @@ const NOTE_URL = process.env.NOTE_URL
 const PERSON_URL = process.env.PERSON_URL
 const USER_URL = process.env.USER_URL
 const INFO_URL = process.env.INFO_URL
+const REGISTER_URL = process.env.REGISTER_URL
 
 // the number of rounds that the bcrypt will go through to hash data
 const SALT_ROUNDS = process.env.SALT_ROUNDS
@@ -40,6 +41,7 @@ module.exports = {
   PERSON_URL,
   USER_URL,
   INFO_URL,
+  REGISTER_URL,
   SALT_ROUNDS,
   SECRET,
 }
