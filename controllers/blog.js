@@ -4,8 +4,14 @@ const Blog = require('../models/blog')
 const User = require('../models/user')
 
 blogRouter.get('/', async (request, response) => {
-  const blogs = await Blog.find({}).lean().exec()
-  response.json(blogs)
+  try {
+    const blogs = await Blog.find({}).lean().exec()
+    response.json(blogs)
+    // .populate('author', {name: 1})
+    // .select({author: false})
+  } catch (error) {
+    console.error(error)
+  }
 })
 
 blogRouter.post('/', async (request, response) => {
