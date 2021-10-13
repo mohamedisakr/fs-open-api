@@ -5,10 +5,14 @@ const User = require('../models/user')
 
 blogRouter.get('/', async (request, response) => {
   try {
-    const blogs = await Blog.find({}).lean().exec()
+    const blogs = await Blog.find({})
+      .populate('user', {username: 1, name: 1})
+      .lean()
+      .exec()
+    // .select({_id: true, title: true})
     // .populate('user', {name: 1})
+
     response.json(blogs)
-    // .select({author: false})
   } catch (error) {
     console.error(error)
   }
