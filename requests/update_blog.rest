@@ -1,9 +1,0 @@
-PUT http://localhost:3001/api/blogs/615a9ebf948807a3e93f8ad1
-Content-Type: application/json
-
-{
-    "title": "my first blog",
-    "author": "Delfina Bosco89",
-    "url": "https://fullstackopen.com/my-first-blog",
-    "likes": 5
-}

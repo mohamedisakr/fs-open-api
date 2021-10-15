@@ -1,0 +1,7 @@
+PUT http://localhost:3001/api/blogs/61660824ff82642821bb6c3c
+Content-Type: application/json
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Im1vaGFzYWtyIiwiaWQiOiI2MTY2MDdmNGZmODI2NDI4MjFiYjZjMzgiLCJpYXQiOjE2MzQyODY1MTYsImV4cCI6MTYzNDI5MDExNn0.ZKUh7xMwvfY1VGNkaH98dROkw1b_XUScbgHomU8feH0
+
+{
+    
+}
