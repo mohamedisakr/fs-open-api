@@ -8,7 +8,7 @@ blogRouter.get('/', async (request, response) => {
     const blogs = await Blog.find({})
       .sort({likes: 'desc'})
       .populate('user', {username: 1, name: 1})
-      .lean()
+      // .lean() // Note: does not return blog id
       .exec()
     // .select({_id: true, title: true})
     // .populate('user', {name: 1})
