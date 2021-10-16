@@ -19,6 +19,17 @@ blogRouter.get('/', async (request, response) => {
   }
 })
 
+blogRouter.get('/:id', async (request, response) => {
+  const {id} = request.params
+  try {
+    const blog = await Blog.findById(id).exec()
+    console.log(``)
+    response.status(200).json(blog)
+  } catch (error) {
+    console.error(error)
+  }
+})
+
 blogRouter.post('/', async (request, response) => {
   const body = request.body
   const decodedToken = jwt.verify(request.token, process.env.SECRET)
@@ -44,25 +55,32 @@ blogRouter.post('/', async (request, response) => {
 })
 
 blogRouter.delete('/:id', async (request, response) => {
-  const decodedToken = jwt.verify(request.token, process.env.SECRET)
-  if (!request.token || !decodedToken.id) {
-    return response.status(401).json({error: 'token missing or invalid'})
+  try {
+    const decodedToken = jwt.verify(request.token, process.env.SECRET)
+    if (!request.token || !decodedToken.id) {
+      return response.status(401).json({error: 'token missing or invalid'})
+    }
+
+    const {id} = request.params
+    console.log(`blog id for deleting : ${id}`)
+    // check if blog will be deleted with by a wrong user
+    const blogToDelete = await Blog.findById(id)
+    // if (blogToDelete.user.toString() !== request.user) {
+    // if (blogToDelete.user.toString() !== request.user.toString()) {
+    if (blogToDelete.user.toString() !== decodedToken.id.toString()) {
+      return response.status(401).json({error: 'wrong author'})
+    }
+
+    const user = await User.findById(decodedToken.id)
+    await Blog.findByIdAndRemove(id)
+
+    user.blogs = user.blogs.filter((blog) => blog.id !== id)
+    await user.save()
+
+    response.status(204).end()
+  } catch (error) {
+    console.error(error)
   }
-
-  const {id} = request.params
-  // check if blog will be deleted with by a wrong user
-  const blogToDelete = await Blog.findById(id)
-  if (blogToDelete.author.toString() !== request.user) {
-    return response.status(401).json({error: 'wrong author'})
-  }
-
-  const user = await User.findById(decodedToken.id)
-  await Blog.findByIdAndRemove(id)
-
-  user.blogs = user.blogs.filter((blog) => blog.id !== id)
-  await user.save()
-
-  response.status(204).end()
 })
 
 blogRouter.put('/:id', async (request, response) => {
