@@ -21,7 +21,7 @@ const resolvers = {
   Query: {
     personCount: () => persons.length,
     allPersons: () => persons,
-    findPerson: (root, args) => persons.find((p) => p.name === args.name),
+    findPerson: (root, {name}) => persons.find((p) => p.name === name),
   },
 }
 
