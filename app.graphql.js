@@ -23,6 +23,9 @@ const resolvers = {
     allPersons: () => persons,
     findPerson: (root, {name}) => persons.find((p) => p.name === name),
   },
+  Person: {
+    id: ({_id, id}) => _id ?? id,
+  },
 }
 
 const server = new ApolloServer({

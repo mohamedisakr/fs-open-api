@@ -27,7 +27,7 @@ const personsGraphQL = [
     phone: '040-123543',
     street: 'Tapiolankatu 5 A',
     city: 'Espoo',
-    id: '3d594650-3436-11e9-bc57-8b80ba54c431',
+    _id: '3d594650-3436-11e9-bc57-8b80ba54c431',
   },
   {
     name: 'Matti Luukkainen',
