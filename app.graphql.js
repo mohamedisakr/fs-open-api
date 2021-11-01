@@ -2,11 +2,15 @@ const {ApolloServer, gql} = require('apollo-server')
 const {personsGraphQL: persons} = require('./fixtures/persons-data')
 
 const typeDefs = gql`
+  type Address {
+    street: String!
+    city: String!
+  }
+
   type Person {
     name: String!
     phone: String
-    street: String!
-    city: String!
+    address: Address!
     id: ID!
   }
 
@@ -25,6 +29,9 @@ const resolvers = {
   },
   Person: {
     id: ({_id, id}) => _id ?? id,
+    address: ({street, city}) => {
+      return {street, city}
+    },
   },
 }
 
