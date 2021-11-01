@@ -1,4 +1,4 @@
-const {ApolloServer, gql} = require('apollo-server')
+const {ApolloServer, gql, UserInputError} = require('apollo-server')
 let {personsGraphQL: persons} = require('./fixtures/persons-data')
 const {v1: uuid} = require('uuid')
 
@@ -39,6 +39,14 @@ const resolvers = {
   },
   Mutation: {
     addPerson: (root, args) => {
+      const foundPersonName = persons.find(
+        (p) => p.name.toLowerCase() === args.name.toLowerCase(),
+      )
+      if (foundPersonName) {
+        throw new UserInputError('Name must be unique', {
+          invalidArgs: args.name,
+        })
+      }
       let person = {...args, id: uuid()}
       persons = persons.concat(person)
       return person
