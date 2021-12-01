@@ -3,6 +3,17 @@ const blogRouter = require('express').Router()
 const Blog = require('../models/blog')
 const User = require('../models/user')
 
+blogRouter.get('/details', async (request, response) => {
+  try {
+    const blogs = await Blog.find({}).exec()
+    const result = {data: blogs, totalblogs: blogs.length}
+    return response.status(200).json(result)
+  } catch (error) {
+    console.error(error)
+    return response.status(500).json({message: 'server error'})
+  }
+})
+
 blogRouter.get('/', async (request, response) => {
   try {
     const blogs = await Blog.find({})
