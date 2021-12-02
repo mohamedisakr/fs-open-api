@@ -1,7 +1,25 @@
 const jwt = require('jsonwebtoken')
 const blogRouter = require('express').Router()
+const crudControllers = require('../utils/crud')
 const Blog = require('../models/blog')
 const User = require('../models/user')
+
+// module.exports = getBlogDetailsWithCount = (model) => async (req, res) => {
+// const getBlogDetailsWithCount = (model) => async (req, res) => {
+//   try {
+//     const blogs = await model.find({}).exec()
+//     const result = {data: blogs, totalblogs: blogs.length}
+//     return res.status(200).json(result)
+//   } catch (error) {
+//     console.error(error)
+//     return res.status(500).json({message: 'server error'})
+//   }
+// }
+
+// const methods = {...crudControllers(Blog), getBlogDetailsWithCount(Blog)}
+module.exports = crudControllers(Blog)
+// module.exports = {getBlogDetailsWithCount}
+/*
 
 blogRouter.get('/details', async (request, response) => {
   try {
@@ -113,3 +131,4 @@ blogRouter.put('/:id', async (request, response) => {
 })
 
 module.exports = blogRouter
+*/

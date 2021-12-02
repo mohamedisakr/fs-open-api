@@ -8,7 +8,7 @@ const app = express()
 
 const config = require('./utils/config')
 const homeRouter = require('./controllers/home')
-const blogRouter = require('./controllers/blog')
+const blogRouter = require('./routes/blog') // require('./controllers/blog')
 const usersRouter = require('./controllers/users')
 const notesRouter = require('./controllers/notes')
 const loginRouter = require('./controllers/login')
