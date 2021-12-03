@@ -4,7 +4,7 @@ const controllers = require('../utils/crud')
 const Blog = require('../models/blog')
 const User = require('../models/user')
 
-exports.getBlogDetailsWithCount = () => async (req, res) => {
+const getBlogDetailsWithCount = () => async (req, res) => {
   try {
     const blogs = await Blog.find({}).exec()
     const result = {data: blogs, totalblogs: blogs.length}
@@ -16,6 +16,8 @@ exports.getBlogDetailsWithCount = () => async (req, res) => {
 }
 
 module.exports = controllers(Blog) //{controllers: crudControllers(Blog)}
+// module.exports.controllers = controllers(Blog)
+module.exports.getBlogDetailsWithCount = getBlogDetailsWithCount
 
 // const controllers = (model) => ({
 //   removeOne: removeOne(model),
