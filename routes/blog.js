@@ -1,5 +1,6 @@
 const {Router} = require('express')
 const controllers = require('../controllers/blog')
+// const getBlogDetailsWithCount = require('../controllers/blog')
 
 const router = Router()
 
@@ -13,7 +14,7 @@ router
   .put(controllers.updateOne)
   .delete(controllers.removeOne)
 
-// /api/blogs
+// /api/blogs/details
 // router.route('/details').get(getBlogDetailsWithCount)
 
 module.exports = router

@@ -1,6 +1,7 @@
 module.exports = getOne = (model) => async (req, res) => {
+  const {id} = req.params
   try {
-    const doc = await model.findOne({_id: req.params.id}).lean().exec()
+    const doc = await model.findOne({_id: id}).lean().exec()
 
     if (!doc) {
       return res.status(400).end()
@@ -35,11 +36,12 @@ module.exports = createOne = (model) => async (req, res) => {
 }
 
 module.exports = updateOne = (model) => async (req, res) => {
+  const {id} = req.params
   try {
     const updatedDoc = await model
       .findOneAndUpdate(
         {
-          _id: req.params.id,
+          _id: id,
         },
         req.body,
         {new: true},
@@ -59,10 +61,9 @@ module.exports = updateOne = (model) => async (req, res) => {
 }
 
 module.exports = removeOne = (model) => async (req, res) => {
+  const {id} = req.params
   try {
-    const removed = await model.findOneAndRemove({
-      _id: req.params.id,
-    })
+    const removed = await model.findOneAndRemove({_id: id})
 
     if (!removed) {
       return res.status(400).end()

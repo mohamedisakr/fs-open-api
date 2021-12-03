@@ -1,24 +1,31 @@
 const jwt = require('jsonwebtoken')
 const blogRouter = require('express').Router()
-const crudControllers = require('../utils/crud')
+const controllers = require('../utils/crud')
 const Blog = require('../models/blog')
 const User = require('../models/user')
 
-// module.exports = getBlogDetailsWithCount = (model) => async (req, res) => {
-// const getBlogDetailsWithCount = (model) => async (req, res) => {
-//   try {
-//     const blogs = await model.find({}).exec()
-//     const result = {data: blogs, totalblogs: blogs.length}
-//     return res.status(200).json(result)
-//   } catch (error) {
-//     console.error(error)
-//     return res.status(500).json({message: 'server error'})
-//   }
-// }
+exports.getBlogDetailsWithCount = () => async (req, res) => {
+  try {
+    const blogs = await Blog.find({}).exec()
+    const result = {data: blogs, totalblogs: blogs.length}
+    return res.status(200).json(result)
+  } catch (error) {
+    console.error(error)
+    return res.status(500).json({message: 'server error'})
+  }
+}
 
-// const methods = {...crudControllers(Blog), getBlogDetailsWithCount(Blog)}
-module.exports = crudControllers(Blog)
-// module.exports = {getBlogDetailsWithCount}
+module.exports = controllers(Blog) //{controllers: crudControllers(Blog)}
+
+// const controllers = (model) => ({
+//   removeOne: removeOne(model),
+//   updateOne: updateOne(model),
+//   getMany: getMany(model),
+//   getOne: getOne(model),
+//   createOne: createOne(model),
+//   getBlogDetailsWithCount: getBlogDetailsWithCount(model),
+// })
+
 /*
 
 blogRouter.get('/details', async (request, response) => {

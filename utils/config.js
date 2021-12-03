@@ -14,7 +14,7 @@ const DATABASE_NAME = process.env.DATABASE_NAME
 // endpoint url
 const BASE_URL = process.env.BASE_URL
 const BLOG_URL = process.env.BLOG_URL
-// const BLOG_DETAILS_URL = process.env.BLOG_DETAILS_URL
+const BLOG_DETAILS_URL = process.env.BLOG_DETAILS_URL
 const LOGIN_URL = process.env.LOGIN_URL
 const NOTE_URL = process.env.NOTE_URL
 const PERSON_URL = process.env.PERSON_URL
@@ -37,7 +37,7 @@ module.exports = {
   DATABASE_NAME,
   BASE_URL,
   BLOG_URL,
-  // BLOG_DETAILS_URL,
+  BLOG_DETAILS_URL,
   LOGIN_URL,
   NOTE_URL,
   PERSON_URL,
