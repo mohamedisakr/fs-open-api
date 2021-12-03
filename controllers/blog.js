@@ -7,7 +7,8 @@ const User = require('../models/user')
 const getBlogDetailsWithCount = () => async (req, res) => {
   console.log(`calling ${getBlogDetailsWithCount.name}`)
   try {
-    const blogs = await Blog.find({}).exec()
+    const blogs = await Blog.find({}).lean().exec()
+    console.log(`blogs type : ${typeof blogs}`)
     const result = {data: blogs, totalblogs: blogs.length}
     return res.status(200).json(result)
   } catch (error) {
