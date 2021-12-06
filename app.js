@@ -50,6 +50,44 @@ app.use(config.NOTE_URL, notesRouter) //'/api/notes'
 app.use(config.PERSON_URL, personsRouter) // '/api/persons'
 app.use(config.INFO_URL, personsRouter) //'/api/info'
 
+// 405 Method Not Allowed routes
+// HEAD Request Method
+app.head('/', (req, res) => {
+  res.status(405).send('The request method HEAD is inappropriate for the URL')
+})
+
+// TRACE Request Method
+app.trace('/', (req, res) => {
+  res.status(405).send('The request method TRACE is inappropriate for the URL')
+})
+
+// OPTIONS Request Method
+app.options('/', (req, res) => {
+  res
+    .status(405)
+    .send('The request method OPTIONS is inappropriate for the URL')
+})
+
+// PATCH Request Method
+app.patch('/', (req, res) => {
+  res.status(405).send('The request method PATCH is inappropriate for the URL')
+})
+
+// PURGE Request Method
+app.purge('/', (req, res) => {
+  res.status(405).send('The request method PURGE is inappropriate for the URL')
+})
+
+// COPY Request Method
+app.copy('/', (req, res) => {
+  res.status(405).send('The request method COPY is inappropriate for the URL')
+})
+
+// LINK Request Method
+app.link('/', (req, res) => {
+  res.status(405).send('The request method LINK is inappropriate for the URL')
+})
+
 app.use(middleware.unknownEndpoint)
 app.use(middleware.errorHandler)
 
