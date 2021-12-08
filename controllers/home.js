@@ -1,8 +1,45 @@
-const homeRouter = require('express').Router()
+const router = require('express').Router()
 
-homeRouter.get('/', (request, response) => {
-  //   const header = JSON.stringify('<h1>API Home Page</h1>')
-  response.status(200).json({message: '<h1>API Home Page</h1>'})
+router.get('/', (req, res) => {
+  res.status(200).json({message: 'API Home Page'})
 })
 
-module.exports = homeRouter
+// 405 Method Not Allowed routes
+// HEAD Request Method
+router.head('/', (req, res) => {
+  res.status(405).send('The request method HEAD is inappropriate for the URL')
+})
+
+// TRACE Request Method
+router.trace('/', (req, res) => {
+  res.status(405).send('The request method TRACE is inappropriate for the URL')
+})
+
+// OPTIONS Request Method
+router.options('/', (req, res) => {
+  res
+    .status(405)
+    .send('The request method OPTIONS is inappropriate for the URL')
+})
+
+// PATCH Request Method
+router.patch('/', (req, res) => {
+  res.status(405).send('The request method PATCH is inappropriate for the URL')
+})
+
+// PURGE Request Method
+router.purge('/', (req, res) => {
+  res.status(405).send('The request method PURGE is inappropriate for the URL')
+})
+
+// COPY Request Method
+router.copy('/', (req, res) => {
+  res.status(405).send('The request method COPY is inappropriate for the URL')
+})
+
+// LINK Request Method
+router.link('/', (req, res) => {
+  res.status(405).send('The request method LINK is inappropriate for the URL')
+})
+
+module.exports = router
