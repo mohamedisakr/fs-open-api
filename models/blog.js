@@ -1,5 +1,7 @@
 const mongoose = require('mongoose')
 
+require('../utils/connection')
+
 const blogSchema = new mongoose.Schema({
   title: {type: String, required: true},
   url: {type: String, required: true},

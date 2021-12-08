@@ -16,20 +16,20 @@ const personsRouter = require('./controllers/persons')
 // const registerRouter = require('./controllers/register')
 
 const middleware = require('./utils/middleware')
-const logger = require('./utils/logger')
-const mongoose = require('mongoose')
+// const logger = require('./utils/logger')
+// const mongoose = require('mongoose')
 
-const {connectionOptions} = require('./utils/constants')
-logger.info(`connecting to database : ${config.MONGODB_URI}`)
+// const {connectionOptions} = require('./utils/constants')
+// logger.info(`connecting to database : ${config.MONGODB_URI}`)
 
-mongoose
-  .connect(config.MONGODB_URI, connectionOptions)
-  .then(() => {
-    logger.info('connected to MongoDB')
-  })
-  .catch((error) => {
-    logger.error('error connecting to MongoDB:', error.message)
-  })
+// mongoose
+//   .connect(config.MONGODB_URI, connectionOptions)
+//   .then(() => {
+//     logger.info('connected to MongoDB')
+//   })
+//   .catch((error) => {
+//     logger.error('error connecting to MongoDB:', error.message)
+//   })
 
 app.use(cors())
 app.use(morgan('combined'))

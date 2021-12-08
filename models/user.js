@@ -3,6 +3,8 @@ const mongoose = require('mongoose')
 
 const {Schema, model} = mongoose
 
+require('../utils/connection')
+
 const userSchema = new Schema({
   username: {type: String, required: true, minlength: 3, unique: true},
   name: String,

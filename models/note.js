@@ -1,6 +1,8 @@
 const mongoose = require('mongoose')
 const {Schema, model} = mongoose
 
+require('../utils/connection')
+
 const noteSchema = new Schema({
   content: {
     type: String,
