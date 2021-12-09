@@ -13,9 +13,11 @@ const usersRouter = require('./controllers/users')
 const notesRouter = require('./controllers/notes')
 const loginRouter = require('./controllers/login')
 const personsRouter = require('./controllers/persons')
+const middleware = require('./utils/middleware')
 // const registerRouter = require('./controllers/register')
 
-const middleware = require('./utils/middleware')
+// disable x-powered-by response header
+app.disable('x-powered-by')
 
 app.use(cors())
 app.use(morgan('combined'))
