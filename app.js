@@ -4,6 +4,8 @@ require('express-async-errors')
 const express = require('express')
 const cors = require('cors')
 const morgan = require('morgan')
+const helmet = require('helmet')
+
 const app = express()
 
 const config = require('./utils/config')
@@ -16,8 +18,8 @@ const personsRouter = require('./controllers/persons')
 const middleware = require('./utils/middleware')
 // const registerRouter = require('./controllers/register')
 
-// disable x-powered-by response header
-app.disable('x-powered-by')
+// let helmet protect app from some well-known web vulnerabilities
+app.use(helmet())
 
 app.use(cors())
 app.use(morgan('combined'))
