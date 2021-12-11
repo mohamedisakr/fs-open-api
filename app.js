@@ -1,6 +1,6 @@
 require('dotenv').config()
 require('express-async-errors')
-
+const compression = require('compression')
 const express = require('express')
 const cors = require('cors')
 const morgan = require('morgan')
@@ -19,7 +19,10 @@ const personsRouter = require('./controllers/persons')
 const middleware = require('./utils/middleware')
 // const registerRouter = require('./controllers/register')
 
-// let helmet protect app from some well-known web vulnerabilities
+// use gzip compression - as expressjs.com suggest for production best practices
+app.use(compression())
+
+// helmet protect app from some well-known web vulnerabilities
 app.use(helmet())
 
 app.use(cors())
