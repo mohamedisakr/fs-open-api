@@ -7,9 +7,9 @@ const {Schema, model} = mongoose
 require('../utils/connection')
 
 const userSchema = new Schema({
-  username: {type: String, required: true, minlength: 3, unique: true},
-  name: String,
+  email: {type: String, required: true, minlength: 3, unique: true},
   passwordHash: String,
+  name: String,
   notes: [
     {
       type: Schema.Types.ObjectId,

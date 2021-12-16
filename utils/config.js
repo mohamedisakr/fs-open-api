@@ -28,6 +28,9 @@ const SALT_ROUNDS = process.env.SALT_ROUNDS
 // secret key
 const SECRET = process.env.SECRET
 
+// jwt expiry date
+const JWT_EXPIRY_PERIOD = process.env.JWT_EXPIRY_PERIOD
+
 module.exports = {
   MONGODB_URI,
   PORT,
@@ -46,4 +49,5 @@ module.exports = {
   REGISTER_URL,
   SALT_ROUNDS,
   SECRET,
+  JWT_EXPIRY_PERIOD,
 }
