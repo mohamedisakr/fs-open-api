@@ -1,16 +1,15 @@
-// const config = require('../config')
 const {SECRET, JWT_EXPIRY_PERIOD} = require('./config')
-const {User} = require('../models/user')
+const User = require('../models/user')
 const jwt = require('jsonwebtoken')
 
-export const newToken = (user) => {
+const newToken = (user) => {
   return jwt.sign({id: user.id}, SECRET, {expiresIn: JWT_EXPIRY_PERIOD})
   //   return jwt.sign({id: user.id}, config.secrets.jwt, {
   //     expiresIn: config.secrets.jwtExp,
   //   })
 }
 
-export const verifyToken = (token) =>
+const verifyToken = (token) =>
   new Promise((resolve, reject) => {
     jwt.verify(token, SECRET, (err, payload) => {
       if (err) return reject(err)
@@ -22,7 +21,7 @@ export const verifyToken = (token) =>
     // })
   })
 
-export const signup = async (req, res) => {
+const signup = async (req, res) => {
   try {
     const {email, password} = req.body
 
@@ -41,7 +40,7 @@ export const signup = async (req, res) => {
     // TODO: check for password validation
 
     // check if email already exist
-    const user = await User.findOne({email}).exec()
+    const user = await User.findOne({email})
     if (user) {
       return res.status(400).json({message: 'user already exist'})
     }
@@ -57,11 +56,11 @@ export const signup = async (req, res) => {
     return res.status(201).json(token)
   } catch (error) {
     console.error(error)
-    return res.status(400).json({message: 'server error'})
+    return res.status(500).json({message: 'server error'})
   }
 }
 
-export const signin = async (req, res) => {
+const signin = async (req, res) => {
   try {
     const {email, password} = req.body
 
@@ -95,11 +94,11 @@ export const signin = async (req, res) => {
     return res.status(200).json(token)
   } catch (error) {
     console.error(error)
-    return res.status(400).json({message: 'server error'})
+    return res.status(500).json({message: 'server error'})
   }
 }
 
-export const protect = async (req, res, next) => {
+const protect = async (req, res, next) => {
   if (!req.headers.authorization) {
     return res.status(403).json({message: 'No credentials sent!'})
   }
@@ -124,3 +123,5 @@ export const protect = async (req, res, next) => {
     return res.status(401).json({message: 'user not authorized'})
   }
 }
+
+module.exports = {newToken, verifyToken, signin, signup, protect}
