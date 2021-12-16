@@ -2,18 +2,20 @@ require('dotenv').config()
 require('express-async-errors')
 const compression = require('compression')
 const express = require('express')
+const app = express()
+
 const cors = require('cors')
 const morgan = require('morgan')
 const helmet = require('helmet')
 const multer = require('multer')
 
-const app = express()
+app.use(compression())
+
 const mainApp = require('./app')
 const config = require('./utils/config')
 const {info} = require('./utils/logger')
 
 // use gzip compression - as expressjs.com suggest for production best practices
-app.use(compression())
 
 // helmet protect app from some well-known web vulnerabilities
 app.use(helmet())
