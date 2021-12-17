@@ -4,9 +4,11 @@ const compression = require('compression')
 const express = require('express')
 const app = express()
 
+// pause helmet for development
+// const helmet = require('helmet')
+
 const cors = require('cors')
 const morgan = require('morgan')
-const helmet = require('helmet')
 const multer = require('multer')
 
 app.use(compression())

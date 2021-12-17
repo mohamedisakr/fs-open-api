@@ -9,6 +9,7 @@ describe('blog controllers', () => {
       'createOne',
       'removeOne',
       'updateOne',
+      // 'readOne',
     ]
 
     crudMethods.forEach((name) =>

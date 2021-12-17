@@ -2,6 +2,23 @@ const {SECRET, JWT_EXPIRY_PERIOD} = require('./config')
 const User = require('../models/user')
 const jwt = require('jsonwebtoken')
 
+const generateAuthToken = (req, res, next) => {
+  // get token from req header
+  const token = req.header('x-auth-token')
+  if (!token) {
+    return res.status(401).json({message: 'Access denied. No token provided'})
+  }
+
+  // verify token against jwt key
+  try {
+    const decoded = jwt.verify(token, SECRET)
+    req.user = decoded
+    next()
+  } catch (error) {
+    console.error(error)
+    res.status(400).json({message: 'Invalid token.'})
+  }
+}
 const newToken = (user) => {
   return jwt.sign({id: user.id}, SECRET, {expiresIn: JWT_EXPIRY_PERIOD})
 }
@@ -118,4 +135,11 @@ const protect = async (req, res, next) => {
   }
 }
 
-module.exports = {newToken, verifyToken, signin, signup, protect}
+module.exports = {
+  generateAuthToken,
+  newToken,
+  verifyToken,
+  signin,
+  signup,
+  protect,
+}
