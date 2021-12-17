@@ -52,7 +52,8 @@ describe('Authentication:', () => {
           expect(status).toBe(201)
           return this
         },
-        async send(result) {
+        // async send(result) {
+        async json(result) {
           let user = await verifyToken(result.token)
           user = await User.findById(user.id).lean().exec()
           expect(user.email).toBe('hello@hello.com')

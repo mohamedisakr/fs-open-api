@@ -4,22 +4,16 @@ const jwt = require('jsonwebtoken')
 
 const newToken = (user) => {
   return jwt.sign({id: user.id}, SECRET, {expiresIn: JWT_EXPIRY_PERIOD})
-  //   return jwt.sign({id: user.id}, config.secrets.jwt, {
-  //     expiresIn: config.secrets.jwtExp,
-  //   })
 }
 
-const verifyToken = (token) =>
+const verifyToken = (token) => {
   new Promise((resolve, reject) => {
     jwt.verify(token, SECRET, (err, payload) => {
       if (err) return reject(err)
       resolve(payload)
     })
-    // jwt.verify(token, config.secrets.jwt, (err, payload) => {
-    //   if (err) return reject(err)
-    //   resolve(payload)
-    // })
   })
+}
 
 const signup = async (req, res) => {
   try {
@@ -56,7 +50,7 @@ const signup = async (req, res) => {
     return res.status(201).json(token)
   } catch (error) {
     console.error(error)
-    return res.status(500).json({message: 'server error'})
+    return res.status(500).json({message: 'server error', error: error.message})
   }
 }
 
