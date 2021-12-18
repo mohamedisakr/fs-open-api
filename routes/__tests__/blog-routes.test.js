@@ -55,17 +55,23 @@ describe('blog router', () => {
     })
 
     it('should return all blogs', async () => {
-      await api
-        .get(BLOG_URL)
-        .expect('Content-Type', /json/)
-        .expect(200)
-        .then((response) => {
-          expect(response.body).toHaveLength(initialBlogs.length)
-        })
-        .catch((err) => console.error(err))
+      const res = await api.get(BLOG_URL)
+      expect(res.body.data).toHaveLength(initialBlogs.length)
+
+      // await api
+      //   .get(BLOG_URL)
+      //   .expect('Content-Type', /json/)
+      //   .expect(200)
+      //   .then((response) => {
+      //     expect(response.body).toHaveLength(initialBlogs.length)
+      //   })
+      //   .catch((err) => console.error(err))
     })
 
     it('should add a valid blog', async () => {
+      // const res = await api.post(BLOG_URL).send(listWithOneBlog[0])
+      // expect(res.body.data).toHaveLength(initialBlogs.length + 1)
+
       await api
         .post(BLOG_URL)
         .send(listWithOneBlog[0])
