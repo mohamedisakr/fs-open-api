@@ -4,8 +4,7 @@ const compression = require('compression')
 const express = require('express')
 const app = express()
 
-// pause helmet for development
-// const helmet = require('helmet')
+const helmet = require('helmet')
 
 const cors = require('cors')
 const morgan = require('morgan')
@@ -20,7 +19,8 @@ const {info} = require('./utils/logger')
 // use gzip compression - as expressjs.com suggest for production best practices
 
 // helmet protect app from some well-known web vulnerabilities
-app.use(helmet())
+// pause helmet for development
+// app.use(helmet())
 
 app.use(cors())
 app.use(morgan('combined'))

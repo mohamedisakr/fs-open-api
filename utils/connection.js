@@ -11,8 +11,8 @@ mongoose
     console.error('error connecting to MongoDB:', error.message)
   })
 
-mongoose.set('toJSON', {virtuals: true})
-mongoose.set('toObject', {virtuals: true})
+// mongoose.set('toJSON', {virtuals: true})
+// mongoose.set('toObject', {virtuals: true})
 
 /**
  const {connectionOptions} = require('./utils/constants')

@@ -7,7 +7,7 @@ const {config} = require('../utils/config')
 const api = require('../utils/common') //supertest(app)
 const url = config.NOTE_URL // '/api/notes'
 
-describe.only('when there is initially some notes saved', () => {
+describe.skip('when there is initially some notes saved', () => {
   beforeEach(async () => {
     await Note.deleteMany({})
     await Note.create(initialNotes)

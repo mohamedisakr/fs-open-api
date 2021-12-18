@@ -2,25 +2,37 @@ const listEmpty = []
 
 const listWithOneBlog = [
   {
-    _id: '5a422aa71b54a676234d17f8',
-    title: 'Go To Statement Considered Harmful',
-    author: 'Edsger W. Dijkstra',
-    url: 'http://www.u.arizona.edu/~rubinson/copyright_violations/Go_To_Considered_Harmful.html',
-    likes: 5,
-    __v: 0,
+    title: 'TDD harms architecture',
+    url: 'http://blog.cleancoder.com/uncle-bob/2017/03/03/TDD-Harms-Architecture.html',
+    likes: 3,
+    user: '616607f4ff82642821bb6c38',
+
+    // title: 'TDD harms architecture',
+    // author: 'Robert C. Martin',
+    // url: 'http://blog.cleancoder.com/uncle-bob/2017/03/03/TDD-Harms-Architecture.html',
+    // likes: 3,
+    // user: '5a422a851b54a676234d1f35',
+  },
+]
+
+//
+const invalidBlogs = [
+  {
+    // title: 'TDD harms architecture',
+    url: 'http://blog.cleancoder.com/uncle-bob/2017/03/03/TDD-Harms-Architecture.html',
+    likes: 3,
+    user: '616607f4ff82642821bb6c38',
   },
 ]
 
 const initialBlogs = [
   {
-    id: '5a422a851b54a676234d17f7',
     title: 'React patterns',
     author: 'Michael Chan',
     url: 'https://reactpatterns.com/',
     likes: 7,
   },
   {
-    id: '5a422aa71b54a676234d17f8',
     title: 'Go To Statement Considered Harmful',
     author: 'Edsger W. Dijkstra',
     url: 'http://www.u.arizona.edu/~rubinson/copyright_violations/Go_To_Considered_Harmful.html',
@@ -79,7 +91,7 @@ const blogs = [
   },
 ]
 
-module.exports = {listEmpty, listWithOneBlog, blogs, initialBlogs}
+module.exports = {listEmpty, listWithOneBlog, invalidBlogs, blogs, initialBlogs}
 
 /*
 const initialBlogs = [
