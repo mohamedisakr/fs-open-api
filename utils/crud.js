@@ -4,7 +4,7 @@ module.exports = getOne = (model) => async (req, res, next) => {
     const doc = await model.findOne({_id: id}).lean().exec()
 
     if (!doc) {
-      return res.status(400).end()
+      return res.status(404).end()
     }
 
     res.status(200).json({data: doc})
