@@ -15,6 +15,13 @@ const listWithOneBlog = [
   },
 ]
 
+const blogToBeDeleted = {
+  title: 'Canonical string reduction',
+  url: 'http://www.cs.utexas.edu/~EWD/transcriptions/EWD08xx/EWD808.html',
+  likes: 12,
+  user: '616607f4ff82642821bb6c38',
+}
+
 //
 const invalidBlogs = [
   {
@@ -91,7 +98,14 @@ const blogs = [
   },
 ]
 
-module.exports = {listEmpty, listWithOneBlog, invalidBlogs, blogs, initialBlogs}
+module.exports = {
+  listEmpty,
+  listWithOneBlog,
+  blogToBeDeleted,
+  invalidBlogs,
+  blogs,
+  initialBlogs,
+}
 
 /*
 const initialBlogs = [

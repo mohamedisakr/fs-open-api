@@ -2,13 +2,13 @@
 const supertest = require('supertest')
 const app = require('../../app')
 const {BLOG_URL} = require('../../utils/config')
+const {blogsInDb} = require('../../utils/test-helper')
 const Blog = require('../../models/blog')
 const {
   initialBlogs,
   listWithOneBlog,
   invalidBlogs,
 } = require('../../fixtures/blogs.data')
-// const blogRouter = require('../blog')
 
 const api = supertest(app)
 
@@ -93,6 +93,44 @@ describe('blog router', () => {
 
       // const response = await api.get(BLOG_URL)
       // expect(response.body).toHaveLength(initialNotes.length)
+    })
+
+    test('should a specific blog be viewed', async () => {
+      const blogsAtStart = await blogsInDb()
+      const blogToView = blogsAtStart[0]
+
+      await api
+        .get(`${BLOG_URL}/${blogToView.id}`)
+        .expect(200)
+        .expect('Content-Type', /application\/json/)
+        .then((response) => {
+          expect(response.body).toEqual(blogToView)
+        })
+        .catch((err) => console.error(err))
+
+      // const processedNoteToView = JSON.parse(JSON.stringify(blogToView))
+      // expect(resultNote.body).toEqual(processedNoteToView)
+    })
+
+    test('should a specific blog be deleted', async () => {
+      const blogsAtStart = await blogsInDb()
+      const blogToRemove = blogsAtStart[0]
+
+      await api
+        .delete(`${BLOG_URL}/${blogToRemove.id}`)
+        .expect(204)
+        .then((response) => {
+          expect(response.body).toHaveLength(initialBlogs.length - 1)
+        })
+        .catch((err) => console.error(err))
+
+      // const blogsAtEnd = await blogsInDb()
+
+      // expect(blogsAtEnd).toHaveLength(initialBlogs.length - 1)
+
+      // const contents = blogsAtEnd.map((r) => r.content)
+
+      // expect(contents).not.toContain(noteToDelete.content)
     })
   })
 })
