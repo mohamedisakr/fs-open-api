@@ -1,9 +1,9 @@
-// const mongoose = require('mongoose')
 const supertest = require('supertest')
 const app = require('../../app')
 const {BLOG_URL} = require('../../utils/config')
 const {blogsInDb, nonExistingId} = require('../../utils/test-helper')
 const Blog = require('../../models/blog')
+// const {createOne, deleteMany} = require('../../utils/seed')
 const {
   initialBlogs,
   listWithOneBlog,
@@ -14,8 +14,13 @@ const api = supertest(app)
 
 describe('Blogs Endpoints', () => {
   beforeEach(async () => {
-    await Blog.deleteMany({})
     await Blog.create(initialBlogs)
+    // await deleteMany(Blog)
+    // await createOne(Blog, initialBlogs)
+  })
+
+  afterEach(async () => {
+    await Blog.deleteMany({})
   })
 
   afterAll(() => {
@@ -81,24 +86,19 @@ describe('Blogs Endpoints', () => {
 
   describe('GET', () => {
     it('should get all blogs as json', async () => {
-      await api
-        .get(BLOG_URL)
-        .expect(200)
-        .expect('Content-Type', /application\/json/)
+      const res = await api.get(BLOG_URL)
+      expect(res.statusCode).toBe(200)
+      expect(res.headers['content-type']).toBeTruthy()
+
+      // await api
+      //   .get(BLOG_URL)
+      //   .expect(200)
+      //   .expect('Content-Type', /application\/json/)
     })
 
     it('should return all blogs', async () => {
       const res = await api.get(BLOG_URL)
       expect(res.body.data).toHaveLength(initialBlogs.length)
-
-      // await api
-      //   .get(BLOG_URL)
-      //   .expect('Content-Type', /json/)
-      //   .expect(200)
-      //   .then((response) => {
-      //     expect(response.body).toHaveLength(initialBlogs.length)
-      //   })
-      //   .catch((err) => console.error(err))
     })
 
     it('should get a specific blog within the returned blogs', async () => {
@@ -149,3 +149,12 @@ describe('Blogs Endpoints', () => {
     })
   })
 })
+
+// await api
+//   .get(BLOG_URL)
+//   .expect('Content-Type', /json/)
+//   .expect(200)
+//   .then((response) => {
+//     expect(response.body).toHaveLength(initialBlogs.length)
+//   })
+//   .catch((err) => console.error(err))
