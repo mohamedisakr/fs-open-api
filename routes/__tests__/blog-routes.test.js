@@ -1,3 +1,4 @@
+const mongoose = require('mongoose')
 const supertest = require('supertest')
 const app = require('../../app')
 const {BLOG_URL} = require('../../utils/config')
@@ -24,7 +25,7 @@ describe('Blogs Endpoints', () => {
   })
 
   afterAll(() => {
-    // mongoose.connection.close()
+    mongoose.connection.close()
   })
 
   describe('DELETE', () => {
@@ -48,10 +49,7 @@ describe('Blogs Endpoints', () => {
   })
 
   describe('POST', () => {
-    it('should add a valid blog', async () => {
-      // const res = await api.post(BLOG_URL).send(listWithOneBlog[0])
-      // expect(res.body.data).toHaveLength(initialBlogs.length + 1)
-
+    it.only('should add a valid blog', async () => {
       await api
         .post(BLOG_URL)
         .send(listWithOneBlog[0])
@@ -145,16 +143,17 @@ describe('Blogs Endpoints', () => {
       await api.get(`${BLOG_URL}/${validNonexistingId}`).expect(404)
     })
 
-    it('should fails with statuscode 400 if id is invalid', async () => {
-      const invalidId = '5a3d5da59070081a82a3445'
-      await api.get(`${BLOG_URL}/${invalidId}`).expect(400)
-    })
-
     it('should return a blog if valid id is passed', async () => {
       const blog = await Blog.create(initialBlogs[0])
       const res = await api.get(`${BLOG_URL}/${blog._id}`)
       expect(res.statusCode).toBe(200)
       expect(res.body.data).toHaveProperty('_id', blog._id.toString())
+    })
+
+    it('should return status 404 if invalid id is passed', async () => {
+      const invalidId = '5a3d5da59070081a82a3445'
+      const res = await api.get(`${BLOG_URL}/${invalidId}`)
+      expect(res.statusCode).toBe(404)
     })
   })
 })
