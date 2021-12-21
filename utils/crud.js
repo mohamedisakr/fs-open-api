@@ -1,7 +1,13 @@
+const mongoose = require('mongoose')
+const ObjectId = mongoose.Types.ObjectId
+
 module.exports = getOne = (model) => async (req, res, next) => {
   const {id} = req.params
   try {
-    const doc = await model.findOne({_id: id}).lean().exec()
+    const doc = await model
+      .findOne({_id: ObjectId(id)})
+      .lean()
+      .exec()
 
     if (!doc) {
       return res.status(404).end()
@@ -41,7 +47,7 @@ module.exports = updateOne = (model) => async (req, res, next) => {
     const updatedDoc = await model
       .findOneAndUpdate(
         {
-          _id: id,
+          _id: ObjectId(id),
         },
         req.body,
         {new: true},
@@ -63,7 +69,7 @@ module.exports = updateOne = (model) => async (req, res, next) => {
 module.exports = removeOne = (model) => async (req, res, next) => {
   const {id} = req.params
   try {
-    const removed = await model.findOneAndRemove({_id: id})
+    const removed = await model.findOneAndRemove({_id: ObjectId(id)})
 
     if (!removed) {
       return res.status(400).end()

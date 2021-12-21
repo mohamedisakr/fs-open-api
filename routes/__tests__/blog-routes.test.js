@@ -118,7 +118,9 @@ describe('Blogs Endpoints', () => {
       //   })
       //   .catch((err) => console.error(err))
     })
+  })
 
+  describe('GET /:id', () => {
     it('should get a specific blog', async () => {
       const blogsAtStart = await blogsInDb()
       const blogToView = blogsAtStart[0]
@@ -146,6 +148,13 @@ describe('Blogs Endpoints', () => {
     it('should fails with statuscode 400 if id is invalid', async () => {
       const invalidId = '5a3d5da59070081a82a3445'
       await api.get(`${BLOG_URL}/${invalidId}`).expect(400)
+    })
+
+    it('should return a blog if valid id is passed', async () => {
+      const blog = await Blog.create(initialBlogs[0])
+      const res = await api.get(`${BLOG_URL}/${blog._id}`)
+      expect(res.statusCode).toBe(200)
+      expect(res.body.data).toHaveProperty('_id', blog._id.toString())
     })
   })
 })
