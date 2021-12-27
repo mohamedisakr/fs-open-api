@@ -13,7 +13,7 @@ const DB_PORT = process.env.DB_PORT
 const DATABASE_NAME = process.env.DATABASE_NAME
 
 // endpoint url
-const BASE_URL = process.env.BASE_URL
+const BASE_URL = `${process.env.BASE_URL}:${PORT}`
 const BLOG_URL = process.env.BLOG_URL
 const BLOG_DETAILS_URL = process.env.BLOG_DETAILS_URL
 const LOGIN_URL = process.env.LOGIN_URL
