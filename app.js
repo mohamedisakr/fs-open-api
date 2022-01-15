@@ -19,6 +19,7 @@ app.use(express.static('build'))
 app.use(express.json())
 app.use(express.urlencoded({extended: true}))
 app.use(multer().none())
+const paginatedResults = require('./middleware/pagination')
 
 const homeRouter = require('./controllers/home')
 const blogRouter = require('./routes/blog')
@@ -27,6 +28,7 @@ const notesRouter = require('./controllers/notes')
 const loginRouter = require('./controllers/login')
 const personsRouter = require('./controllers/persons')
 const middleware = require('./utils/middleware')
+const {users100} = require('./fixtures/persons-data')
 // const registerRouter = require('./controllers/register')
 
 app.use(middleware.requestLogger)
@@ -44,6 +46,11 @@ app.use(config.BLOG_URL, blogRouter) //'/api/blogs'
 app.use(config.NOTE_URL, notesRouter) //'/api/notes'
 app.use(config.PERSON_URL, personsRouter) // '/api/persons'
 app.use(config.INFO_URL, personsRouter) //'/api/info'
+
+// testing for pagination
+app.use('/pagination', paginatedResults(users100), (req, res, next) => {
+  res.json(res.results)
+})
 
 app.use(middleware.unknownEndpoint)
 app.use(middleware.errorHandler)

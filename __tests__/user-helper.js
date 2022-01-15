@@ -14,6 +14,18 @@ const generateNewUserFaker = () => {
   }
 }
 
+const generate100Users = () => {
+  let result = []
+  for (let i = 0; i < 100; i++) {
+    let user = generateNewUserFaker()
+    result.push(user)
+  }
+  return result
+}
+
+const result = generate100Users()
+console.log(result)
+
 module.exports = {getUsersInDb, generateNewUserFaker}
 
 // const newUser = {
