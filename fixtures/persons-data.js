@@ -547,4 +547,507 @@ const users100 = [
   },
 ]
 
-module.exports = {persons, personsGraphQL, users100}
+const customers100 = [
+  {
+    username: 'Rosamond_Kiehn81',
+    name: 'Freddie Hirthe',
+    email: 'Christophe94@hotmail.com',
+  },
+  {
+    username: 'Erica.Hagenes',
+    name: 'Newell Daugherty',
+    email: 'Joanie_Streich@gmail.com',
+  },
+  {
+    username: 'Gennaro.Rosenbaum',
+    name: 'Marlene Kuphal',
+    email: 'Cristopher61@yahoo.com',
+  },
+  {
+    username: 'Leonora52',
+    name: 'Edgardo Heidenreich',
+    email: 'Treva_Larkin@hotmail.com',
+  },
+  {
+    username: 'Korey_Buckridge75',
+    name: 'Lysanne Steuber',
+    email: 'Maxwell.Smitham3@yahoo.com',
+  },
+  {
+    username: 'Rhiannon.Wisoky',
+    name: 'Lucinda Willms',
+    email: 'Otha25@hotmail.com',
+  },
+  {
+    username: 'Lloyd_Shanahan34',
+    name: 'Antwon Bradtke',
+    email: 'Vivienne.Morissette24@gmail.com',
+  },
+  {
+    username: 'Nathanial.Rippin95',
+    name: 'Evan Collins',
+    email: 'Arlie.Walter@hotmail.com',
+  },
+  {
+    username: 'Destin95',
+    name: 'Friedrich Mante',
+    email: 'Jimmie_Runte68@hotmail.com',
+  },
+  {
+    username: 'Isom.Spinka10',
+    name: 'Krystal Herman',
+    email: 'Reilly.Cummings69@yahoo.com',
+  },
+  {
+    username: 'Alisha.Wolf66',
+    name: 'Edgar Dicki',
+    email: 'Hilma.Prohaska@gmail.com',
+  },
+  {
+    username: 'Niko_Nolan',
+    name: 'Alfonzo Gerhold',
+    email: 'Rusty_Emard50@hotmail.com',
+  },
+  {
+    username: 'Felipa.Jacobs54',
+    name: 'Eudora Balistreri',
+    email: 'Flavio.Cronin42@yahoo.com',
+  },
+  {
+    username: 'Darien48',
+    name: 'Genesis Bauch',
+    email: 'Sierra.Ruecker57@gmail.com',
+  },
+  {
+    username: 'Madisyn39',
+    name: 'Deontae Boehm',
+    email: 'Beverly_Schumm@yahoo.com',
+  },
+  {
+    username: 'Major.VonRueden29',
+    name: 'Bert Cartwright',
+    email: 'Haskell_Breitenberg@yahoo.com',
+  },
+  {
+    username: 'Randall44',
+    name: 'Erling Lebsack',
+    email: 'Junior_Conroy33@hotmail.com',
+  },
+  {
+    username: 'Jairo80',
+    name: 'Terrell Schimmel',
+    email: 'Michaela61@gmail.com',
+  },
+  {
+    username: 'Milton_Jerde0',
+    name: 'Leila Skiles',
+    email: 'Nona79@gmail.com',
+  },
+  {
+    username: 'Stacey_Ruecker',
+    name: 'Euna Pollich',
+    email: 'Neil65@yahoo.com',
+  },
+  {
+    username: 'Sven_Graham',
+    name: 'Mathew Hyatt',
+    email: 'Hortense.Wehner@yahoo.com',
+  },
+  {
+    username: 'Albina.Nitzsche51',
+    name: 'Alessia Wisozk',
+    email: 'Precious2@yahoo.com',
+  },
+  {
+    username: 'Micaela_Rath31',
+    name: 'Johnathon Kunze',
+    email: 'Louie.Gleichner47@hotmail.com',
+  },
+  {
+    username: 'Jamarcus23',
+    name: 'Melba Hamill',
+    email: 'Stevie_Gleichner@yahoo.com',
+  },
+  {
+    username: 'Petra_Rath11',
+    name: 'Ida VonRueden',
+    email: 'Mario21@yahoo.com',
+  },
+  {
+    username: 'Candelario92',
+    name: 'Annabelle Tremblay',
+    email: 'Ulises_Orn85@hotmail.com',
+  },
+  {
+    username: 'Anna_Graham',
+    name: 'Adriana Hoppe',
+    email: 'Madie92@gmail.com',
+  },
+  {
+    username: 'Sophia.Glover',
+    name: 'Wilfrid Brown',
+    email: 'Paxton1@hotmail.com',
+  },
+  {
+    username: 'Rachael.Hoppe90',
+    name: 'Santa Kirlin',
+    email: 'Jeanne_Kunde20@yahoo.com',
+  },
+  {
+    username: 'Kian_Weber',
+    name: 'Lew Cartwright',
+    email: 'Lexie0@yahoo.com',
+  },
+  {
+    username: 'Adriel88',
+    name: 'Ceasar Lowe',
+    email: 'Odie_Howell@hotmail.com',
+  },
+  {
+    username: 'Felix8',
+    name: 'Lazaro Zemlak',
+    email: 'Mable1@hotmail.com',
+  },
+  {
+    username: 'Sofia39',
+    name: 'Wilfrid Towne',
+    email: 'Josianne.Thiel@hotmail.com',
+  },
+  {
+    username: 'Larue.Shields83',
+    name: 'Emelie McGlynn',
+    email: 'Florian_Bashirian@yahoo.com',
+  },
+  {
+    username: 'Robyn.Block',
+    name: 'Laurence Flatley',
+    email: 'Mauricio.Murazik@hotmail.com',
+  },
+  {
+    username: 'Myrtle_Graham72',
+    name: 'Lamont Kilback',
+    email: 'Guadalupe83@yahoo.com',
+  },
+  {
+    username: 'Christelle72',
+    name: 'Duane Wilderman',
+    email: 'Raymundo94@gmail.com',
+  },
+  {
+    username: 'Henry.Mueller98',
+    name: 'Reymundo Rempel',
+    email: 'Giuseppe.Purdy@gmail.com',
+  },
+  {
+    username: 'Junius.Ankunding',
+    name: 'Ramona Gislason',
+    email: 'Pasquale.Herman@hotmail.com',
+  },
+  {
+    username: 'Zoie_Gaylord',
+    name: 'Kristin Tromp',
+    email: 'Guido.Simonis38@hotmail.com',
+  },
+  {
+    username: 'Hillary_Volkman',
+    name: 'Gerry Bernhard',
+    email: 'Ulises_Davis28@gmail.com',
+  },
+  {
+    username: 'Junius_Kertzmann41',
+    name: 'Alfredo Wehner',
+    email: 'Katelyn92@hotmail.com',
+  },
+  {
+    username: 'Reinhold.Glover63',
+    name: 'Unique Zieme',
+    email: 'Melyssa74@gmail.com',
+  },
+  {
+    username: 'Yoshiko0',
+    name: 'Quincy Langosh',
+    email: 'Adriana.Jakubowski@gmail.com',
+  },
+  {
+    username: 'Johann.Marvin65',
+    name: 'Bret Upton',
+    email: 'Spencer89@gmail.com',
+  },
+  {
+    username: 'Leopold22',
+    name: 'Abelardo Lebsack',
+    email: 'Bettye_Lowe@yahoo.com',
+  },
+  {
+    username: 'Nels46',
+    name: 'Yasmeen Bartoletti',
+    email: 'Mariah_Gerlach@hotmail.com',
+  },
+  {
+    username: 'Alena90',
+    name: 'Litzy Skiles',
+    email: 'Ross.Dickinson@yahoo.com',
+  },
+  {
+    username: 'Myrtie.Kuvalis87',
+    name: 'Destini Green',
+    email: 'Alexis.Senger@yahoo.com',
+  },
+  {
+    username: 'Miracle_Labadie0',
+    name: 'Vernie Dickens',
+    email: 'Jody_Rutherford18@yahoo.com',
+  },
+  {
+    username: 'Ofelia48',
+    name: 'Kara Reinger',
+    email: 'Sid.Quigley42@gmail.com',
+  },
+  {
+    username: 'Maybell_Rath',
+    name: 'Romaine Kutch',
+    email: 'Dedric37@hotmail.com',
+  },
+  {
+    username: 'Aniya.Shanahan83',
+    name: 'Emmitt Veum',
+    email: 'Burley_Kirlin@yahoo.com',
+  },
+  {
+    username: 'Serenity.Conn',
+    name: 'Guiseppe Jakubowski',
+    email: 'Cloyd_Donnelly75@yahoo.com',
+  },
+  {
+    username: 'Monique_Altenwerth93',
+    name: 'Nick Mertz',
+    email: 'Lauretta_Williamson19@hotmail.com',
+  },
+  {
+    username: 'Lea.Toy67',
+    name: 'Eliseo Kutch',
+    email: 'Brendan.Swift80@hotmail.com',
+  },
+  {
+    username: 'Sigmund_Dibbert',
+    name: 'Cristina Gulgowski',
+    email: 'Clifford.Grimes57@hotmail.com',
+  },
+  {
+    username: 'Emilia_Tillman',
+    name: 'Rhiannon Dooley',
+    email: 'Arlo.Herzog@hotmail.com',
+  },
+  {
+    username: 'Bertram.Senger53',
+    name: 'Rachelle Prosacco',
+    email: 'Freda18@hotmail.com',
+  },
+  {
+    username: 'Dahlia.Paucek',
+    name: 'Mary Kuphal',
+    email: 'Ashley.Donnelly@gmail.com',
+  },
+  {
+    username: 'Veronica57',
+    name: 'Blanca Dach',
+    email: 'Herminio_Marvin@gmail.com',
+  },
+  {
+    username: 'Corbin.DuBuque43',
+    name: 'Deondre McDermott',
+    email: 'Jaquelin_Cummings34@gmail.com',
+  },
+  {
+    username: 'Nathanial37',
+    name: 'Carlee McGlynn',
+    email: 'Rocio1@hotmail.com',
+  },
+  {
+    username: 'Emerson43',
+    name: 'Monte Schulist',
+    email: 'Adrianna_Kuhn4@yahoo.com',
+  },
+  {
+    username: 'Cathy_Lehner',
+    name: 'Jordon Beier',
+    email: 'Augusta.Gulgowski15@yahoo.com',
+  },
+  {
+    username: 'Monica32',
+    name: 'Mellie Windler',
+    email: 'Casimir17@yahoo.com',
+  },
+  {
+    username: 'Stevie_Beahan',
+    name: 'Kobe Becker',
+    email: 'Elwin0@hotmail.com',
+  },
+  {
+    username: 'Brandt_Doyle53',
+    name: 'Albertha Fahey',
+    email: 'Kieran32@hotmail.com',
+  },
+  {
+    username: 'Ephraim59',
+    name: 'Jessyca Jerde',
+    email: 'Geovany63@gmail.com',
+  },
+  {
+    username: 'Elenor73',
+    name: 'Genesis Dooley',
+    email: 'Gaetano_Considine@hotmail.com',
+  },
+  {
+    username: 'Arlo.Corwin52',
+    name: 'Delphia Morissette',
+    email: 'Donnell4@yahoo.com',
+  },
+  {
+    username: 'Cordia_Fadel',
+    name: 'Eileen Roob',
+    email: 'Russel_Kutch@hotmail.com',
+  },
+  {
+    username: 'Sabrina_Jones',
+    name: 'Emile Watsica',
+    email: 'Mellie.Ortiz34@hotmail.com',
+  },
+  {
+    username: 'Rosie_Gibson',
+    name: 'Lowell Gleason',
+    email: 'Pamela.Kulas@yahoo.com',
+  },
+  {
+    username: 'Ayden_Wolf',
+    name: 'Odie Mueller',
+    email: 'Sheridan.Corkery26@gmail.com',
+  },
+  {
+    username: 'Luz_Kub62',
+    name: 'Eudora Schaefer',
+    email: 'Aditya_Kuvalis64@yahoo.com',
+  },
+  {
+    username: 'Oleta96',
+    name: 'Jeffery Ruecker',
+    email: 'Julius.Will@gmail.com',
+  },
+  {
+    username: 'Gerardo_Gerlach',
+    name: 'Ken Hegmann',
+    email: 'Reese_Ryan27@yahoo.com',
+  },
+  {
+    username: 'Dariana.Nitzsche',
+    name: 'Eriberto Marquardt',
+    email: 'Mariana49@gmail.com',
+  },
+  {
+    username: 'Alysson32',
+    name: 'Benjamin Lemke',
+    email: 'Theodora31@yahoo.com',
+  },
+  {
+    username: 'Emma_Denesik17',
+    name: 'Stephen Langworth',
+    email: 'Carolanne81@gmail.com',
+  },
+  {
+    username: 'Cooper_Quitzon',
+    name: 'Collin Bode',
+    email: 'Winfield_Renner54@hotmail.com',
+  },
+  {
+    username: 'Sheila26',
+    name: 'Tyrique Becker',
+    email: 'Vernie_Ullrich24@hotmail.com',
+  },
+  {
+    username: 'Lawson26',
+    name: 'Noemy Jacobi',
+    email: 'Keagan.Kertzmann27@gmail.com',
+  },
+  {
+    username: 'Desmond.Graham94',
+    name: 'Iliana Hills',
+    email: 'Anita.Stroman@yahoo.com',
+  },
+  {
+    username: 'Bria68',
+    name: 'Junius Boyer',
+    email: 'Chaya41@gmail.com',
+  },
+  {
+    username: 'Sedrick50',
+    name: 'Marshall VonRueden',
+    email: 'Idell_Thompson@yahoo.com',
+  },
+  {
+    username: 'Emely.Keeling',
+    name: 'Marguerite Wolf',
+    email: 'Dusty.Jacobson@hotmail.com',
+  },
+  {
+    username: 'Colleen19',
+    name: 'Justina Flatley',
+    email: 'Stella0@gmail.com',
+  },
+  {
+    username: 'Santa.Sipes88',
+    name: 'Waldo Homenick',
+    email: 'Silas_Auer@gmail.com',
+  },
+  {
+    username: 'Gina54',
+    name: 'Milan Spinka',
+    email: 'Keenan.Wisoky25@hotmail.com',
+  },
+  {
+    username: 'Harmon.Hintz',
+    name: 'Melvina Satterfield',
+    email: 'Michael70@hotmail.com',
+  },
+  {
+    username: 'Katharina.Corwin',
+    name: 'Emmanuelle Howell',
+    email: 'Gaston_Kihn92@yahoo.com',
+  },
+  {
+    username: 'Guillermo.Cremin24',
+    name: 'Sean Turcotte',
+    email: 'Isadore.Schaden@hotmail.com',
+  },
+  {
+    username: 'Gudrun97',
+    name: 'Gaston Bechtelar',
+    email: 'Eileen28@gmail.com',
+  },
+  {
+    username: 'Vergie.Bins47',
+    name: 'Lisandro Kemmer',
+    email: 'Freddy16@gmail.com',
+  },
+  {
+    username: 'Abigail_Abbott',
+    name: 'Garret Hessel',
+    email: 'Victor.Considine@hotmail.com',
+  },
+  {
+    username: 'Emmalee_Stanton12',
+    name: 'Nicklaus Howell',
+    email: 'Willis42@hotmail.com',
+  },
+  {
+    username: 'Delores_Schmitt',
+    name: 'Elwyn Lemke',
+    email: 'Nikolas68@hotmail.com',
+  },
+  {
+    username: 'Richard.Hayes',
+    name: 'Callie Nienow',
+    email: 'Corbin_Harber86@hotmail.com',
+  },
+]
+
+module.exports = {persons, personsGraphQL, users100, customers100}

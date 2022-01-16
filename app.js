@@ -48,9 +48,9 @@ app.use(config.PERSON_URL, personsRouter) // '/api/persons'
 app.use(config.INFO_URL, personsRouter) //'/api/info'
 
 // testing for pagination
-app.use('/pagination', paginatedResults(users100), (req, res, next) => {
-  res.json(res.results)
-})
+// app.use('/pagination', paginatedResults(users100), (req, res, next) => {
+//   res.json(res.results)
+// })
 
 app.use(middleware.unknownEndpoint)
 app.use(middleware.errorHandler)

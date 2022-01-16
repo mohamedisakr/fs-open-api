@@ -10,11 +10,12 @@ const generateNewUserFaker = () => {
   return {
     username: faker.internet.userName(),
     name: `${faker.name.firstName()} ${faker.name.lastName()}`,
-    password: faker.internet.password(),
+    email: faker.internet.email(),
+    // password: faker.internet.password(),
   }
 }
 
-const generate100Users = () => {
+const generate100Customers = () => {
   let result = []
   for (let i = 0; i < 100; i++) {
     let user = generateNewUserFaker()
@@ -23,7 +24,7 @@ const generate100Users = () => {
   return result
 }
 
-const result = generate100Users()
+const result = generate100Customers()
 console.log(result)
 
 module.exports = {getUsersInDb, generateNewUserFaker}

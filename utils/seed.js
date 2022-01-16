@@ -1,5 +1,8 @@
+const {customers100} = require('../fixtures/persons-data')
+const Customer = require('../models/customer')
+
 require('./connection')
-const createOne = (model, objects) => {
+const createOne = async (model, objects) => {
   try {
     const doc = await model.create({...objects})
     return doc
@@ -17,4 +20,15 @@ const deleteMany = async (model) => {
   }
 }
 
-module.exports = {createOne, deleteMany}
+const createMany = async (model, data) => {
+  try {
+    const docs = await model.create(data) //.exec()
+    return docs
+  } catch (e) {
+    console.error(e)
+  }
+}
+
+// createMany(Customer, customers100)
+
+module.exports = {createOne, deleteMany, createMany}
