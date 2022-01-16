@@ -1,9 +1,3 @@
-/*
-username: 'Richard.Hayes',
-    name: 'Callie Nienow',
-    email: 'Corbin_Harber86@hotmail.com',
-*/
-
 const {Schema, model} = require('mongoose')
 
 require('../utils/connection')
