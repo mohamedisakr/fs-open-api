@@ -11,7 +11,7 @@ const pagination = (model) => {
     pagination.meta = {}
 
     pagination.meta.total = total
-    pagination.meta.pages = total / limit
+    pagination.meta.pages = Math.ceil(total / limit)
     pagination.meta.current = page
 
     if (endIndex < total) {
