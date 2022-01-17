@@ -12,19 +12,14 @@ const pagination = (model) => {
 
     pagination.meta.total = total
     pagination.meta.pages = total / limit
+    pagination.meta.current = page
 
     if (endIndex < total) {
-      pagination.meta.next = {
-        page: page + 1,
-        limit,
-      }
+      pagination.meta.next = page + 1
     }
 
     if (startIndex > 0) {
-      pagination.meta.previous = {
-        page: page - 1,
-        limit,
-      }
+      pagination.meta.previous = page - 1
     }
 
     try {
@@ -43,3 +38,13 @@ const pagination = (model) => {
 }
 
 module.exports = pagination
+
+// pagination.meta.previous = {
+//   page: ,
+//   limit,
+// }
+
+// pagination.meta.next = {
+//   page: page + 1,
+//   limit,
+// }
