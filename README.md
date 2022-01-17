@@ -1,5 +1,12 @@
 ## API
 
+### Pagination
+
+```
+middleware\pagination.js
+controllers\customer.js
+```
+
 #### Debugging in Express
 
 ```
